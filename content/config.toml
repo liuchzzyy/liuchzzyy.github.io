@@ -32,7 +32,7 @@ enable_likes = true
 enable_one_page_mode = false
 
 [[navigation]]
-title = "About"
+title = "About Me"
 type = "page"
 target = "about"
 href = "/"
@@ -51,7 +51,7 @@ href = "/projects"
 
 [[navigation]]
 title = "News"
-type = "list"
+type = "page"
 target = "news"
 href = "/news"
 

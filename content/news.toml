@@ -1,3 +1,7 @@
+type = "list"
+title = "News"
+description = "Latest updates and announcements."
+
 [[news]]
 date = "2025-11-01"
 content = "Our work has been accepted by a prestigious journal 🎉"
