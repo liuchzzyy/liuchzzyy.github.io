@@ -13,6 +13,13 @@ interface NewsProps {
 }
 
 export default function News({ items, title = 'News' }: NewsProps) {
+    // sort items by date descending (newest first)
+    const sortedItems = items.slice().sort((a, b) => {
+        const ta = new Date(a.date).getTime();
+        const tb = new Date(b.date).getTime();
+        return tb - ta;
+    });
+
     return (
         <motion.section
             initial={{ opacity: 0, y: 20 }}
@@ -21,7 +28,7 @@ export default function News({ items, title = 'News' }: NewsProps) {
         >
             <h2 className="text-2xl font-serif font-bold text-primary mb-4">{title}</h2>
             <div className="space-y-3">
-                {items.map((item, index) => (
+                {sortedItems.map((item, index) => (
                     <div key={index} className="flex items-start space-x-3">
                         <span className="text-xs text-neutral-500 mt-1 w-16 flex-shrink-0">{item.date}</span>
                         <p className="text-sm text-neutral-700">{item.content}</p>

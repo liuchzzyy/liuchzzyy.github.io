@@ -1,6 +1,6 @@
 type = "card"
 title = "Projects"
-description = "Selected research projects and implemented tools. 以下为示例项目，你可以替换为自己的项目详情。"
+description = "Selected research projects and implemented tools."
 
 [[items]]
 title = "Multiscale Simulation of Thermal Transport"
