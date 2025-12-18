@@ -1,11 +1,11 @@
-type = "list"
+type = "page"
 title = "News"
 description = "Latest updates and announcements."
 
-[[news]]
+[[items]]
 date = "2025-11-01"
 content = "Our work has been accepted by a prestigious journal 🎉"
 
-[[news]]
+[[items]]
 date = "2025-09-01"
 content = "Starting my PhD at the University of Example"
