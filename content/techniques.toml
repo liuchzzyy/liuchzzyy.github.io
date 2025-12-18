@@ -1,0 +1,4 @@
+type = "text"
+title = "Techniques"
+description = "Methods, tools and techniques used in research."
+source = "techniques.md"

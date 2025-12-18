@@ -18,6 +18,11 @@ export function generateStaticParams() {
     const config = getConfig();
     return config.navigation
         .filter(nav => nav.type === 'page' && nav.target !== 'about') // 'about' is handled by root page
+        .filter(nav => {
+            // only include pages that have a corresponding TOML config file
+            const pageConfig = getPageConfig(nav.target);
+            return pageConfig !== null;
+        })
         .map(nav => ({
             slug: nav.target,
         }));

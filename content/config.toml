@@ -1,29 +1,28 @@
 [site]
-title = "Jiale Liu"
-description = "PhD student at the University of Example."
-favicon = "/favicon.svg"
+title = "I am Cheng Liu"
+description = "PhD student at ICMAB-CSIC, Spain."
+favicon = "docs/static/favicon.svg"
 last_updated = "November 18, 2025"
 
 [author]
-name = "Jiale Liu"
+name = "Cheng Liu"
 title = "PhD Student"
-institution = "University of Example"
-avatar = "/bio.jpg"
+institution = "ICMAB-CSIC, Spain"
+avatar = "docs/static/bio.jpg"
 
 [social]
 # Contact information (leave blank or delete to hide)
 
-email = "john.doe@example.com"
-location = "City, Country"
-location_url = "https://maps.google.com"
+email = "liuchzzyy@163.com"
+location = "Barcelona, Spain"
+location_url = "https://www.google.com/maps/place/Institute+of+Materials+Science+of+Barcelona+(ICMAB-CSIC)/@35.226773,-17.4123491,5z/data=!4m10!1m2!2m1!1sicmab!3m6!1s0x12a495d5f8a1143b:0x20d754b9dfa8a7ca!8m2!3d41.5020566!4d2.1103129!15sCgVpY21hYloHIgVpY21hYpIBEnJlc2VhcmNoX2luc3RpdHV0ZZoBJENoZERTVWhOTUc5blMwVkpRMEZuU1VNdGIwMURUekYzUlJBQuABAPoBBAgAECQ!16s%2Fg%2F1tg09w5y?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoASAFQAw%3D%3D"
 location_details = [
-  "Room 123, Science Building,",
-  "University Avenue, City, Country"
+  "Universitat Autònoma de Barcelona, Campus de la, Carrer dels Til·lers, s/n, 08193 Bellaterra, Barcelona, Spain"
 ]
-google_scholar = "https://scholar.google.com"
-orcid = "https://orcid.org"
-github = "https://github.com"
-linkedin = "https://linkedin.com"
+google_scholar = "https://scholar.google.com/citations?user=E7pDru4AAAAJ&hl=en"
+orcid = "https://orcid.org/0000-0001-8967-1174"
+github = "https://github.com/liuchzzyy"
+xiaohongshu = "https://www.xiaohongshu.com/user/profile/67154fd1000000001d02113d"
 
 [features]
 # Show a like button on the about page
@@ -45,25 +44,25 @@ target = "publications"
 href = "/publications"
 
 [[navigation]]
-title = "Teaching"
+title = "Projects"
 type = "page"
-target = "teaching"
-href = "/teaching"
+target = "projects"
+href = "/projects"
 
 [[navigation]]
-title = "Awards"
+title = "News"
 type = "page"
-target = "awards"
-href = "/awards"
+target = "news"
+href = "/news"
 
 [[navigation]]
-title = "Services"
+title = "Techniques"
 type = "page"
-target = "services"
-href = "/services"
+target = "techniques"
+href = "/techniques"
 
 [[navigation]]
-title = "CV"
+title = "Resume"
 type = "page"
-target = "cv"
-href = "/cv"
+target = "resume"
+href = "/resume"

@@ -1,0 +1,30 @@
+type = "card"
+title = "Projects"
+description = "Selected research projects and implemented tools. 以下为示例项目，你可以替换为自己的项目详情。"
+
+[[items]]
+title = "Multiscale Simulation of Thermal Transport"
+subtitle = "从原子尺度到宏观尺度的热传输建模"
+date = "2024-06"
+content = "使用分子动力学 (MD) 与有限元 (FEM) 联合建模研究纳米材料中的热传导机制；负责数值方法实现、并行化优化与结果可视化。"
+tags = ["molecular-dynamics", "finite-element", "GPU"]
+link = "/projects/multiscale-thermal-transport"
+image = "public/projects/thermal-transport.png"
+
+[[items]]
+title = "Efficient Solvers for Large-Scale Eigenproblems"
+subtitle = "用于材料模拟的高效特征值求解器"
+date = "2023-11"
+content = "设计并实现基于稀疏矩阵的迭代求解器（包含预条件与分布式计算支持），提高了大规模第一性原理计算中的收敛性能。"
+tags = ["numerical-methods", "linear-algebra", "parallel"]
+link = "/projects/eigen-solvers"
+image = "public/projects/eigen-solvers.png"
+
+[[items]]
+title = "Data-driven Analysis of Experimental Spectra"
+subtitle = "结合机器学习的谱图解析流程"
+date = "2022-09"
+content = "构建从预处理、特征提取到模型拟合的端到端管道，用于分析材料表征数据（Raman/IR/XRD），并提供可复现的 Jupyter 分析模板。"
+tags = ["data-science", "python", "machine-learning"]
+link = "/projects/spectral-analysis"
+image = "public/projects/spectral-analysis.png"

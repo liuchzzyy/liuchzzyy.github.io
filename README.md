@@ -1,125 +1,91 @@
 <div align="center">
-  <img src="./logo.png" alt="PRISM Logo" height="100"/>
+  <img src="docs\static\logo.png" alt="PRISM Logo" height="100"/>
 </div>
 
-# PRISM
+---
 
-**English** · [中文](README_cn.md) · [Demo](https://prism-demo.pages.dev)  · [Changelog](CHANGELOG.md)
+**PRISM**（Portfolio & Research Interface Site Maker）是一个基于 Next.js、Tailwind CSS 和 TypeScript 的个人网站模板，适合研究人员、开发者与学者快速搭建作品集与学术主页。此文档为仓库的简洁介绍与快速上手指南。
 
-**If you like this project, please give it a star ⭐️**
+**如果你喜欢这个项目，请给[原项目](https://github.com/xyjoey/PRISM)一个 Star ⭐️**
 
-PRISM stands for **P**ortfolio & **R**esearch **I**nterface **S**ite **M**aker. It is a modern, configurable, and high-performance personal website template built with Next.js, Tailwind CSS, and TypeScript. It is designed for researchers, developers, and academics to showcase their work, publications, and portfolio with ease.
+**在线演示**: https://prism-demo.pages.dev
+![PRISM 预览](docs/static/screenshot.png)
+**更新日志**: [CHANGELOG.md](CHANGELOG.md)
 
-![PRISM Preview](screenshot.png)
+---
 
-## ✨ Features
+## 简要说明
 
-*   **📄 Configuration-Driven**: Manage your entire site's content using simple `TOML`, `Markdown`, and `BibTeX` files in the `content/` directory. No code changes required for content updates!
-*   **📚 BibTeX Support**: Directly render your publications from a `.bib` file. Includes search, filtering (Year, Type), and automatic citation generation.
-*   **🎨 Modern Design**: Clean, responsive UI with a beautiful serif/sans-serif typography pairing, smooth animations (Framer Motion), and Dark Mode support.
-*   **⚡️ High Performance**: Built on Next.js 20 with Turbopack. Static export ensures blazing fast load times and easy deployment.
-*   **🔍 SEO Optimized**: Dynamic metadata generation for every page.
-*   **🧩 Dynamic Routing**: Easily add new pages by simply creating a config file.
+PRISM 采用配置驱动的内容管理：通过编辑 `content/` 下的 TOML、Markdown 与 BibTeX 文件即可控制站点内容；无需修改源码。项目优化了静态导出与 SEO，便于在各种静态托管平台上部署。
 
-## 🚀 Getting Started
+## 主要功能
 
-### Prerequisites
+- 配置驱动的内容管理（TOML / Markdown / BibTeX）
+- 原生 BibTeX 支持，自动生成论文列表与引用展示
+- 响应式设计与深色模式支持
+- 针对静态部署优化，容易部署到 GitHub Pages / Cloudflare Pages 等
 
-*   Node.js 22 or later
-    *   **Important**: Please download and install Node.js manually from [https://nodejs.org/en/download](https://nodejs.org/en/download).
-    *   Better not to use the pre-installed version on your system, as it may be outdated or incompatible.
-*   npm, pnpm, or yarn
+## 快速开始
 
-### Installation
+先决条件：Node.js 22+（推荐使用 Docker 安装）
 
-1.  **Clone the repository:**
+1. 克隆仓库并进入目录：
 
-    ```bash
-    git clone https://github.com/xyjoey/PRISM.git
-    cd PRISM
-    ```
-
-2.  **Install dependencies:**
-
-    ```bash
-    npm install
-    ```
-
-3.  **Run the development server:**
-
-    ```bash
-    npm run dev
-    ```
-
-    Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-## 🛠️ Configuration
-
-All content lives in the `content/` directory.
-
-### 1. Global Site Config (`content/config.toml`)
-Configure your site title, author details, social links, and navigation menu here.
-
-```toml
-[site]
-title = "Your Name"
-description = "Personal website of Your Name"
-url = "https://your-website.com"
-
-[author]
-name = "Your Name"
-title = "PhD Student / Researcher"
-# ...
-
-[features]
-enable_likes = true
+```bash
+git clone https://github.com/xyjoey/PRISM.git
+cd PRISM
 ```
 
-### 2. Homepage (`content/about.toml`)
-Customize the "About" section, "News", and "Selected Publications" on the homepage.
+2. 安装依赖：
 
-### 3. Publications (`content/publications.bib`)
-Export your publications from Google Scholar, Zotero, or Mendeley to `content/publications.bib`. PRISM automatically parses this file to generate your Publications page. Customize the display of publications by changing `selected`, `preview` and `description` keys in the bib file. 
+```bash
+npm install
+```
 
-### 4. Adding New Pages
-To add a new page (e.g., "Projects"), create a TOML file in `content/` (e.g., `content/projects.toml`) and add it to the `navigation` list in `content/config.toml`.
+3. 启动开发服务器：
 
-Supported page types:
-*   `text`: Renders Markdown content (Great for CVs, Bio).
-*   `card`: Renders a list of cards (Great for Projects, Awards).
-*   `publication`: Renders the full publications list with filters.
+```bash
+npm run dev
+```
 
-## 📦 Deployment
+在浏览器中访问 http://localhost:3000 进行预览。
 
-PRISM is optimized for static deployment.
+构建静态站点：
 
 ```bash
 npm run build
 ```
 
-This generates a static `out/` directory that can be hosted anywhere.
+构建后站点将输出到 `out/`（静态托管目录）。有关部署的详细步骤，请参阅 [docs/deployment.md](docs/deployment.md)。
 
-👉 **[Read the full Deployment Guide](docs/deployment.md)** for instructions on deploying to **GitHub Pages** and **Cloudflare Pages**.
+## 配置说明（概览）
 
-## 📂 Project Structure
+- 全站配置：`content/config.toml`，包含站点标题、作者、导航等
+- 首页内容：`content/about.toml`（关于、新闻、精选论文等）
+- 论文数据：`content/publications.bib`，支持从 Zotero/Google Scholar 导出
+- 新页面：在 `content/` 下新增 TOML 文件，并将其添加到 `config.toml` 的导航中
+
+常见页面类型：`text`（Markdown 文档）、`card`（卡片集合）、`publication`（论文列表）
+
+## 项目结构（简要）
 
 ```
 PRISM/
-├── content/              # All user-editable content (TOML, BibTeX, MD)
-├── public/               # Static assets (images, papers)
-├── src/
-│   ├── app/              # Next.js App Router
-│   ├── components/       # React components
-│   ├── lib/              # Utility functions (parsers, config loaders)
-│   └── types/            # TypeScript definitions
-├── next.config.ts        # Next.js configuration
-└── tailwind.config.ts    # Tailwind CSS configuration
+├─ content/        # 用户内容（TOML、MD、BibTeX）
+├─ public/         # 静态资源（图片、PDF 等）
+├─ src/
+│  ├─ app/         # Next.js 应用路由
+│  ├─ components/  # 组件
+│  ├─ lib/         # 工具、解析器
+│  └─ types/       # TypeScript 类型
+├─ next.config.ts
+└─ tailwind.config.ts
 ```
 
-## 🤝 Contributing
+## 参与贡献
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+欢迎通过 Issue 或 Pull Request 参与改进。查看仓库的贡献指南（如有）并在 PR 中说明修改内容。
 
-## 📄 License
+## 许可证
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+本项目采用 MIT 许可证，详见 [LICENSE](LICENSE)。
