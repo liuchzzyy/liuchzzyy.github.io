@@ -3,8 +3,8 @@
   "version": "1.2.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
+    "dev": "node scripts/sync-assets.js && next dev --turbopack",
+    "build": "node scripts/sync-assets.js && next build",
     "start": "next start",
     "lint": "next lint"
   },

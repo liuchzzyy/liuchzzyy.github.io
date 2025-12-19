@@ -19,6 +19,7 @@ content = "设计并实现基于稀疏矩阵的迭代求解器（包含预条件
 tags = ["numerical-methods", "linear-algebra", "parallel"]
 link = "/projects/eigen-solvers"
 image = "public/projects/eigen-solvers.png"
+image = "/docs/projects/eigen-solvers.png"
 
 [[items]]
 title = "Data-driven Analysis of Experimental Spectra"
@@ -27,4 +28,4 @@ date = "2022-09"
 content = "构建从预处理、特征提取到模型拟合的端到端管道，用于分析材料表征数据（Raman/IR/XRD），并提供可复现的 Jupyter 分析模板。"
 tags = ["data-science", "python", "machine-learning"]
 link = "/projects/spectral-analysis"
-image = "public/projects/spectral-analysis.png"
+image = "/docs/projects/spectral-analysis.png"
