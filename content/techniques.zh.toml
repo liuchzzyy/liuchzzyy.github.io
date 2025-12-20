@@ -1,4 +1,4 @@
 type = "text"
 title = "技术"
 description = "研究中使用的方法、工具和技术。"
-source = "techniques.md"
+source = "techniques.zh.md"
