@@ -1,31 +1,31 @@
 # Techniques
 
-以下概述了常用的方法、工具与工作流程，便于将来在项目页面或方法部分复用。
+The following outlines commonly used methods, tools, and workflows for future reuse in project pages or methodology sections.
 
-## 计算与模拟
+## Computational & Simulation
 
-- 分子动力学（MD）：LAMMPS / GROMACS，用于原子尺度动力学模拟与热输运研究。
-- 第一性原理与电子结构：用于小尺寸体系的密度泛函理论（DFT）计算，借助现有软件包进行能带/态密度分析。
-- 有限元方法（FEM）：用于宏观尺度的热/力学耦合问题建模。
-- 多尺度耦合：结合 MD 与 FEM 的边界条件与参数传递策略。
+- Molecular Dynamics (MD): LAMMPS / GROMACS, for atomic-scale dynamics simulations and thermal transport studies.
+- First-principles & Electronic Structure: Density Functional Theory (DFT) calculations for small-scale systems, utilizing existing software packages for band structure / density of states analysis.
+- Finite Element Method (FEM): For modeling macroscopic-scale thermal/mechanical coupling problems.
+- Multiscale Coupling: Strategies for boundary condition and parameter transfer combining MD and FEM.
 
-## 数值方法与并行化
+## Numerical Methods & Parallelization
 
-- 迭代线性求解器与预条件技术（Krylov 子空间方法、AMG 等）。
-- 特征值问题求解（Lanczos / Davidson 算法）的性能优化。
-- GPU 加速与并行计算（CUDA / OpenCL / MPI 并行化实践）。
+- Iterative linear solvers and preconditioning techniques (Krylov subspace methods, AMG, etc.).
+- Performance optimization for eigenvalue problems (Lanczos / Davidson algorithms).
+- GPU acceleration and parallel computing (CUDA / OpenCL / MPI parallelization practices).
 
-## 数据处理与可视化
+## Data Processing & Visualization
 
-- Python 工具链：NumPy / SciPy / pandas / scikit-learn。
-- 可视化：Matplotlib、Plotly、ParaView（用于三维场数据）。
-- 可重复性：Jupyter Notebooks、数据与分析脚本的版本控制。
+- Python toolchain: NumPy / SciPy / pandas / scikit-learn.
+- Visualization: Matplotlib, Plotly, ParaView (for 3D field data).
+- Reproducibility: Jupyter Notebooks, version control for data and analysis scripts.
 
-## 实验与表征（如适用）
+## Experimental & Characterization (if applicable)
 
-- 谱学分析（Raman / IR）：谱图预处理、背景校正、峰拟合流程。
-- 结构表征（XRD）：衍射图谱处理与峰分配。
+- Spectroscopy analysis (Raman / IR): Spectral preprocessing, background correction, peak fitting procedures.
+- Structural characterization (XRD): Diffraction pattern processing and peak assignment.
 
 ---
 
-你可以把具体的工具链、命令示例或对外部依赖的安装说明添加到此处。若你愿意，我可以把常用的代码片段（例如并行运行 LAMMPS 的命令、或 Python 数据处理模板）也放入文档中。
+You can add specific toolchain details, command examples, or installation instructions for external dependencies here. If desired, common code snippets (e.g., commands for running LAMMPS in parallel, or Python data processing templates) can also be included in this document.
