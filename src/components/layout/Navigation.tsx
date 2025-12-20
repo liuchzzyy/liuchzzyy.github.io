@@ -11,6 +11,7 @@ import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { LanguageToggle } from '@/components/ui/LanguageToggle';
 import { SiteConfig } from '@/lib/config';
 import { useTranslation } from '@/lib/i18n/useTranslation';
+import { type NavTranslationKey } from '@/lib/i18n/translations';
 
 interface NavigationProps {
   items: SiteConfig['navigation'];
@@ -19,7 +20,7 @@ interface NavigationProps {
 }
 
 // Map of navigation targets to translation keys
-const navTranslationMap: Record<string, keyof typeof import('@/lib/i18n/translations').translations.en.nav> = {
+const navTranslationMap: Record<string, NavTranslationKey> = {
   'about': 'aboutMe',
   'publications': 'publications',
   'projects': 'projects',

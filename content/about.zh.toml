@@ -12,7 +12,7 @@ research_interests = [
 [[sections]]
 id = "about"
 type = "markdown"
-source = "bio.md"
+source = "bio.zh.md"
 title = "关于我"
 
 [[sections]]
@@ -26,4 +26,4 @@ limit = 5
 id = "news"
 type = "list"
 title = "新闻动态"
-source = "news.toml"
+source = "news.zh.toml"

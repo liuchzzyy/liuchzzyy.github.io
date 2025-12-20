@@ -44,3 +44,4 @@ export const translations = {
 } as const;
 
 export type TranslationKey = typeof translations.en;
+export type NavTranslationKey = keyof typeof translations.en.nav;
