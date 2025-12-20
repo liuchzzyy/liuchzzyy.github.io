@@ -5,7 +5,9 @@ description = "Latest updates and announcements."
 [[items]]
 date = "2025-11-01"
 content = "Our work has been accepted by a prestigious journal 🎉"
+image = "example.png"
 
 [[items]]
 date = "2025-09-01"
 content = "Starting my PhD at the University of Example"
+image = "example.png"

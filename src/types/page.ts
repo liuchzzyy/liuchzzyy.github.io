@@ -32,6 +32,7 @@ export interface CardPageConfig extends BasePageConfig {
 export interface NewsItem {
     date: string;
     content: string;
+    image?: string;
 }
 
 export interface ListPageConfig extends BasePageConfig {
