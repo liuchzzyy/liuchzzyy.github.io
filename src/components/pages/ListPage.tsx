@@ -37,7 +37,7 @@ export default function ListPage({ config, embedded = false }: { config: ListPag
                         className="bg-white dark:bg-neutral-900 p-6 rounded-xl shadow-sm border border-neutral-200 dark:border-neutral-800 hover:shadow-md transition-all duration-200"
                     >
                         <div className="flex flex-col gap-4">
-                            <span className="text-sm font-medium text-accent bg-accent/10 px-3 py-1 rounded-md shrink-0 w-fit">
+                            <span className="text-2xl font-medium text-accent bg-accent/10 px-3 py-1 rounded-md shrink-0 w-fit">
                                 {item.date}
                             </span>
                             <div className="flex flex-col md:flex-row gap-6">
