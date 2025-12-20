@@ -42,7 +42,7 @@ export default function ListPage({ config, embedded = false }: { config: ListPag
                                     <div className="aspect-video md:aspect-[4/3] relative rounded-lg overflow-hidden bg-neutral-100 dark:bg-neutral-800">
                                         <Image
                                             src={`/docs/public/papers/${item.image}`}
-                                            alt={item.content.substring(0, 50)}
+                                            alt={`${item.date} - ${item.content}`}
                                             fill
                                             className="object-cover"
                                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
