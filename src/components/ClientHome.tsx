@@ -32,7 +32,13 @@ interface PageData {
 }
 
 interface ClientHomeProps {
-  authorData: {
+  authorDataEn: {
+    name: string;
+    title: string;
+    institution: string;
+    avatar: string;
+  };
+  authorDataZh: {
     name: string;
     title: string;
     institution: string;
@@ -51,7 +57,8 @@ interface ClientHomeProps {
 }
 
 export default function ClientHome({
-  authorData,
+  authorDataEn,
+  authorDataZh,
   socialData,
   featuresData,
   researchInterestsEn,
@@ -65,6 +72,7 @@ export default function ClientHome({
   // Select data based on current language
   const pagesToShow = language === 'zh' ? pagesZh : pagesEn;
   const researchInterests = language === 'zh' ? researchInterestsZh : researchInterestsEn;
+  const authorData = language === 'zh' ? authorDataZh : authorDataEn;
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-background min-h-screen">

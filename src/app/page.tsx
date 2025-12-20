@@ -130,12 +130,13 @@ function loadContentForLanguage(config: ReturnType<typeof getConfig>, language: 
 }
 
 export default function Home() {
-  const config = getConfig();
-  const enableOnePageMode = config.features.enable_one_page_mode;
+  const configEn = getConfig('en');
+  const configZh = getConfig('zh');
+  const enableOnePageMode = configEn.features.enable_one_page_mode;
 
   // Load content for both languages at build time
-  const pagesEn = loadContentForLanguage(config, 'en');
-  const pagesZh = loadContentForLanguage(config, 'zh');
+  const pagesEn = loadContentForLanguage(configEn, 'en');
+  const pagesZh = loadContentForLanguage(configZh, 'zh');
 
   // Get research interests for both languages
   const aboutConfigEn = getPageConfig('about', 'en');
@@ -145,9 +146,10 @@ export default function Home() {
 
   return (
     <ClientHome
-      authorData={config.author}
-      socialData={config.social}
-      featuresData={config.features}
+      authorDataEn={configEn.author}
+      authorDataZh={configZh.author}
+      socialData={configEn.social}
+      featuresData={configEn.features}
       researchInterestsEn={researchInterestsEn}
       researchInterestsZh={researchInterestsZh}
       enableOnePageMode={enableOnePageMode ?? false}

@@ -15,7 +15,8 @@ import { type NavTranslationKey } from '@/lib/i18n/translations';
 
 interface NavigationProps {
   items: SiteConfig['navigation'];
-  siteTitle: string;
+  siteTitleEn: string;
+  siteTitleZh: string;
   enableOnePageMode?: boolean;
 }
 
@@ -29,11 +30,14 @@ const navTranslationMap: Record<string, NavTranslationKey> = {
   'resume': 'resume',
 };
 
-export default function Navigation({ items, siteTitle, enableOnePageMode }: NavigationProps) {
+export default function Navigation({ items, siteTitleEn, siteTitleZh, enableOnePageMode }: NavigationProps) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [activeHash, setActiveHash] = useState('');
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
+
+  // Get site title based on language
+  const siteTitle = language === 'zh' ? siteTitleZh : siteTitleEn;
 
   // Function to get translated title
   const getNavTitle = (item: SiteConfig['navigation'][0]) => {
