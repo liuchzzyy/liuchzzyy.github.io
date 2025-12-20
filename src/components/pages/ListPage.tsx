@@ -36,25 +36,25 @@ export default function ListPage({ config, embedded = false }: { config: ListPag
                         transition={{ duration: 0.4, delay: 0.1 * index }}
                         className="bg-white dark:bg-neutral-900 p-6 rounded-xl shadow-sm border border-neutral-200 dark:border-neutral-800 hover:shadow-md transition-all duration-200"
                     >
-                        <div className="flex flex-col md:flex-row gap-6">
-                            {item.image && (
-                                <div className="w-full md:w-48 flex-shrink-0">
-                                    <div className="aspect-video md:aspect-[4/3] relative rounded-lg overflow-hidden bg-neutral-100 dark:bg-neutral-800">
-                                        <Image
-                                            src={`/docs/public/papers/${item.image}`}
-                                            alt={`${item.date} - ${item.content}`}
-                                            fill
-                                            className="object-cover"
-                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                        />
+                        <div className="flex flex-col gap-4">
+                            <span className="text-sm font-medium text-accent bg-accent/10 px-3 py-1 rounded-md shrink-0 w-fit">
+                                {item.date}
+                            </span>
+                            <div className="flex flex-col md:flex-row gap-6">
+                                {item.image && (
+                                    <div className="w-full md:w-48 flex-shrink-0">
+                                        <div className="aspect-video md:aspect-[4/3] relative rounded-lg overflow-hidden bg-neutral-100 dark:bg-neutral-800">
+                                            <Image
+                                                src={`/docs/public/papers/${item.image}`}
+                                                alt={`${item.date} - ${item.content}`}
+                                                fill
+                                                className="object-cover"
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                            />
+                                        </div>
                                     </div>
-                                </div>
-                            )}
-                            <div className="flex-grow flex flex-col justify-center">
-                                <div className="flex flex-col sm:flex-row sm:items-start gap-4">
-                                    <span className="text-sm font-medium text-accent bg-accent/10 px-3 py-1 rounded-md shrink-0 w-fit">
-                                        {item.date}
-                                    </span>
+                                )}
+                                <div className="flex-grow flex flex-col justify-center">
                                     <p className={`${embedded ? "text-base" : "text-lg"} text-neutral-700 dark:text-neutral-300 leading-relaxed`}>
                                         {item.content}
                                     </p>
