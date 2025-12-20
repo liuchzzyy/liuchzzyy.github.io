@@ -1,14 +1,16 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { NewsItem } from '@/types/page';
 
 interface NewsProps {
     items: NewsItem[];
     title?: string;
+    enableOnePageMode?: boolean;
 }
 
-export default function News({ items, title = 'News' }: NewsProps) {
+export default function News({ items, title = 'News', enableOnePageMode = false }: NewsProps) {
     // sort items by date descending (newest first)
     const sortedItems = items.slice().sort((a, b) => {
         const ta = new Date(a.date).getTime();
@@ -22,7 +24,16 @@ export default function News({ items, title = 'News' }: NewsProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
         >
-            <h2 className="text-2xl font-serif font-bold text-primary mb-4">{title}</h2>
+            <div className="flex items-center justify-between mb-4">
+                <h2 className="text-2xl font-serif font-bold text-primary">{title}</h2>
+                <Link
+                    href={enableOnePageMode ? "/#news" : "/news"}
+                    prefetch={true}
+                    className="text-accent hover:text-accent-dark text-sm font-medium transition-all duration-200 rounded hover:bg-accent/10 hover:shadow-sm"
+                >
+                    View All →
+                </Link>
+            </div>
             <div className="space-y-4">
                 {sortedItems.map((item) => (
                     <div key={`${item.date}-${item.content.substring(0, 20)}`} className="p-4 bg-white dark:bg-neutral-900 rounded-lg border border-neutral-200 dark:border-neutral-800 hover:shadow-md transition-all duration-200">

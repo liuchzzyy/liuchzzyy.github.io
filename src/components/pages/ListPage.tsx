@@ -50,7 +50,7 @@ export default function ListPage({ config, embedded = false }: { config: ListPag
                                     </div>
                                 </div>
                             )}
-                            <div className="flex-grow flex flex-col justify-center gap-2">
+                            <div className="flex-grow flex flex-col gap-2">
                                 <span className="text-sm font-medium text-accent bg-accent/10 px-3 py-1 rounded-md shrink-0 w-fit">
                                     {item.date}
                                 </span>
