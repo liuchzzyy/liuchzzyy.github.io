@@ -1,13 +1,13 @@
 [site]
-title = "这里是刘诚"
-description = "西班牙ICMAB-CSIC博士生。"
+title = "刘城 - 个人主页"
+description = "西班牙 ICMAB-CSIC 博士生。"
 favicon = "/docs/static/favicon.svg"
 last_updated = "2025年11月20日"
 
 [author]
-name = "刘诚"
+name = "刘城"
 title = "博士生"
-institution = "西班牙ICMAB-CSIC"
+institution = "西班牙 ICMAB-CSIC"
 avatar = "/docs/static/bio.jpg"
 
 [social]
