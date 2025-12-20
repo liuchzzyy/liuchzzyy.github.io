@@ -1,14 +1,7 @@
 import { getConfig } from '@/lib/config';
 import { getMarkdownContent, getBibtexContent, getTomlContent, getPageConfig } from '@/lib/content';
 import { parseBibTeX } from '@/lib/bibtexParser';
-import Profile from '@/components/home/Profile';
-import About from '@/components/home/About';
-import SelectedPublications from '@/components/home/SelectedPublications';
-import News from '@/components/home/News';
-import PublicationsList from '@/components/publications/PublicationsList';
-import TextPage from '@/components/pages/TextPage';
-import CardPage from '@/components/pages/CardPage';
-import ListPage from '@/components/pages/ListPage';
+import ClientHome from '@/components/ClientHome';
 
 import { Publication } from '@/types/publication';
 import { BasePageConfig, PublicationPageConfig, TextPageConfig, CardPageConfig, ListPageConfig, NewsItem } from '@/types/page';
@@ -33,13 +26,11 @@ type PageData =
   | { type: 'card', id: string, config: CardPageConfig }
   | { type: 'list', id: string, config: ListPageConfig };
 
-export default function Home() {
-  const config = getConfig();
+function loadContentForLanguage(config: ReturnType<typeof getConfig>, language: string): PageData[] {
   const enableOnePageMode = config.features.enable_one_page_mode;
 
   // Always load about page config for profile info
-  const aboutConfig = getPageConfig('about');
-  const researchInterests = (aboutConfig as { profile?: { research_interests?: string[] } })?.profile?.research_interests;
+  const aboutConfig = getPageConfig('about', language);
 
   // Helper function to process sections (for about page)
   const processSections = (sections: SectionConfig[]) => {
@@ -48,10 +39,10 @@ export default function Home() {
         case 'markdown':
           return {
             ...section,
-            content: section.source ? getMarkdownContent(section.source) : ''
+            content: section.source ? getMarkdownContent(section.source, language) : ''
           };
         case 'publications': {
-          const bibtex = getBibtexContent('publications.bib');
+          const bibtex = getBibtexContent('publications.bib', language);
           const allPubs = parseBibTeX(bibtex);
           const filteredPubs = section.filter === 'selected'
             ? allPubs.filter(p => p.selected)
@@ -62,7 +53,7 @@ export default function Home() {
           };
         }
         case 'list': {
-          const newsData = section.source ? getTomlContent<{ items: NewsItem[] }>(section.source) : null;
+          const newsData = section.source ? getTomlContent<{ items: NewsItem[] }>(section.source, language) : null;
           return {
             ...section,
             items: newsData?.items || []
@@ -81,7 +72,7 @@ export default function Home() {
     pagesToShow = config.navigation
       .filter(item => item.type === 'page')
       .map(item => {
-        const rawConfig = getPageConfig(item.target);
+        const rawConfig = getPageConfig(item.target, language);
         if (!rawConfig) return null;
 
         const pageConfig = rawConfig as BasePageConfig;
@@ -94,7 +85,7 @@ export default function Home() {
           } as PageData;
         } else if (pageConfig.type === 'publication') {
           const pubConfig = pageConfig as PublicationPageConfig;
-          const bibtex = getBibtexContent(pubConfig.source);
+          const bibtex = getBibtexContent(pubConfig.source, language);
           return {
             type: 'publication',
             id: item.target,
@@ -107,7 +98,7 @@ export default function Home() {
             type: 'text',
             id: item.target,
             config: textConfig,
-            content: getMarkdownContent(textConfig.source)
+            content: getMarkdownContent(textConfig.source, language)
           } as PageData;
         } else if (pageConfig.type === 'card') {
           return {
@@ -135,88 +126,34 @@ export default function Home() {
     }
   }
 
+  return pagesToShow;
+}
+
+export default function Home() {
+  const config = getConfig();
+  const enableOnePageMode = config.features.enable_one_page_mode;
+
+  // Load content for both languages at build time
+  const pagesEn = loadContentForLanguage(config, 'en');
+  const pagesZh = loadContentForLanguage(config, 'zh');
+
+  // Get research interests for both languages
+  const aboutConfigEn = getPageConfig('about', 'en');
+  const aboutConfigZh = getPageConfig('about', 'zh');
+  const researchInterestsEn = (aboutConfigEn as { profile?: { research_interests?: string[] } })?.profile?.research_interests;
+  const researchInterestsZh = (aboutConfigZh as { profile?: { research_interests?: string[] } })?.profile?.research_interests;
+
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-background min-h-screen">
-      {/* Main Content Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-
-        {/* Left Column - Profile */}
-        <div className="lg:col-span-1">
-          <Profile
-            author={config.author}
-            social={config.social}
-            features={config.features}
-            researchInterests={researchInterests}
-          />
-        </div>
-
-        {/* Right Column - Content */}
-        <div className="lg:col-span-2 space-y-8">
-          {pagesToShow.map((page) => (
-            <section key={page.id} id={page.id} className="scroll-mt-24 space-y-8">
-              {page.type === 'about' && page.sections.map((section: SectionConfig) => {
-                switch (section.type) {
-                  case 'markdown':
-                    return (
-                      <About
-                        key={section.id}
-                        content={section.content || ''}
-                        title={section.title}
-                      />
-                    );
-                  case 'publications':
-                    return (
-                      <SelectedPublications
-                        key={section.id}
-                        publications={section.publications || []}
-                        title={section.title}
-                        enableOnePageMode={enableOnePageMode}
-                      />
-                    );
-                  case 'list':
-                    return (
-                      <News
-                        key={section.id}
-                        items={section.items || []}
-                        title={section.title}
-                        enableOnePageMode={enableOnePageMode}
-                      />
-                    );
-                  default:
-                    return null;
-                }
-              })}
-              {page.type === 'publication' && (
-                <PublicationsList
-                  config={page.config}
-                  publications={page.publications}
-                  embedded={true}
-                />
-              )}
-              {page.type === 'text' && (
-                <TextPage
-                  config={page.config}
-                  content={page.content}
-                  embedded={true}
-                />
-              )}
-              {page.type === 'card' && (
-                <CardPage
-                  config={page.config}
-                  embedded={true}
-                />
-              )}
-              {page.type === 'list' && (
-                <ListPage
-                  config={page.config}
-                  embedded={true}
-                />
-              )}
-            </section>
-          ))}
-        </div>
-      </div>
-    </div>
+    <ClientHome
+      authorData={config.author}
+      socialData={config.social}
+      featuresData={config.features}
+      researchInterestsEn={researchInterestsEn}
+      researchInterestsZh={researchInterestsZh}
+      enableOnePageMode={enableOnePageMode ?? false}
+      pagesEn={pagesEn}
+      pagesZh={pagesZh}
+    />
   );
 }
 
