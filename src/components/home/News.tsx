@@ -27,11 +27,11 @@ export default function News({ items, title = 'News' }: NewsProps) {
             transition={{ duration: 0.6, delay: 0.5 }}
         >
             <h2 className="text-2xl font-serif font-bold text-primary mb-4">{title}</h2>
-            <div className="space-y-3">
+            <div className="space-y-4">
                 {sortedItems.map((item, index) => (
-                    <div key={index} className="flex items-start space-x-3">
-                        <span className="text-xs text-neutral-500 mt-1 w-16 flex-shrink-0">{item.date}</span>
-                        <p className="text-sm text-neutral-700">{item.content}</p>
+                    <div key={index} className="flex items-start space-x-4 p-4 bg-white dark:bg-neutral-900 rounded-lg border border-neutral-200 dark:border-neutral-800 hover:shadow-md transition-all duration-200">
+                        <span className="text-sm font-medium text-accent bg-accent/10 px-3 py-1 rounded-md shrink-0">{item.date}</span>
+                        <p className="text-base text-neutral-700 dark:text-neutral-300">{item.content}</p>
                     </div>
                 ))}
             </div>

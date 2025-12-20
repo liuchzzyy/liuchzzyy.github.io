@@ -8,9 +8,10 @@ import News, { NewsItem } from '@/components/home/News';
 import PublicationsList from '@/components/publications/PublicationsList';
 import TextPage from '@/components/pages/TextPage';
 import CardPage from '@/components/pages/CardPage';
+import ListPage from '@/components/pages/ListPage';
 
 import { Publication } from '@/types/publication';
-import { BasePageConfig, PublicationPageConfig, TextPageConfig, CardPageConfig } from '@/types/page';
+import { BasePageConfig, PublicationPageConfig, TextPageConfig, CardPageConfig, ListPageConfig } from '@/types/page';
 
 // Define types for section config
 interface SectionConfig {
@@ -29,7 +30,8 @@ type PageData =
   | { type: 'about', id: string, sections: SectionConfig[] }
   | { type: 'publication', id: string, config: PublicationPageConfig, publications: Publication[] }
   | { type: 'text', id: string, config: TextPageConfig, content: string }
-  | { type: 'card', id: string, config: CardPageConfig };
+  | { type: 'card', id: string, config: CardPageConfig }
+  | { type: 'list', id: string, config: ListPageConfig };
 
 export default function Home() {
   const config = getConfig();
@@ -60,10 +62,10 @@ export default function Home() {
           };
         }
         case 'list': {
-          const newsData = section.source ? getTomlContent<{ news: NewsItem[] }>(section.source) : null;
+          const newsData = section.source ? getTomlContent<{ items: NewsItem[] }>(section.source) : null;
           return {
             ...section,
-            items: newsData?.news || []
+            items: newsData?.items || []
           };
         }
         default:
@@ -112,6 +114,12 @@ export default function Home() {
             type: 'card',
             id: item.target,
             config: pageConfig as CardPageConfig
+          } as PageData;
+        } else if (pageConfig.type === 'list') {
+          return {
+            type: 'list',
+            id: item.target,
+            config: pageConfig as ListPageConfig
           } as PageData;
         }
         return null;
@@ -193,6 +201,12 @@ export default function Home() {
               )}
               {page.type === 'card' && (
                 <CardPage
+                  config={page.config}
+                  embedded={true}
+                />
+              )}
+              {page.type === 'list' && (
+                <ListPage
                   config={page.config}
                   embedded={true}
                 />

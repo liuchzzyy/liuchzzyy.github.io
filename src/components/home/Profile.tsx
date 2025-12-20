@@ -26,7 +26,7 @@ const OrcidIcon = ({ className }: { className?: string }) => (
     </svg>
 );
 
-// Simple Xiaohongshu icon (stylized)
+// Xiaohongshu (Little Red Book) icon
 const XiaohongshuIcon = ({ className }: { className?: string }) => (
     <svg
         viewBox="0 0 24 24"
@@ -34,8 +34,8 @@ const XiaohongshuIcon = ({ className }: { className?: string }) => (
         className={className}
         xmlns="http://www.w3.org/2000/svg"
     >
-        <circle cx="12" cy="12" r="10" />
-        <path d="M8 12h8M12 8v8" stroke="white" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+        <rect x="4" y="4" width="16" height="16" rx="3" fill="currentColor" />
+        <text x="12" y="16" fontSize="10" fontWeight="bold" fill="white" textAnchor="middle" fontFamily="Arial, sans-serif">书</text>
     </svg>
 );
 
