@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslation } from '@/lib/i18n/useTranslation';
+import { Rss } from 'lucide-react';
 
 interface FooterProps {
   lastUpdatedEn?: string;
@@ -18,12 +19,22 @@ export default function Footer({ lastUpdatedEn, lastUpdatedZh }: FooterProps) {
           <p className="text-xs text-neutral-500">
             {t.common.lastUpdated} {lastUpdated || new Date().toLocaleDateString(language === 'zh' ? 'zh-CN' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
           </p>
-          <p className="text-xs text-neutral-500 flex items-center">
-            <a href="https://github.com/xyjoey/PRISM" target="_blank" rel="noopener noreferrer">
-              Built with PRISM
+          <div className="flex items-center gap-4">
+            <a 
+              href="/rss/feed.xml" 
+              className="text-xs text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300 flex items-center gap-1"
+              title="RSS Feed"
+            >
+              <Rss className="w-3 h-3" />
+              RSS
             </a>
-            <span className="ml-2">🚀</span>
-          </p>
+            <p className="text-xs text-neutral-500 flex items-center">
+              <a href="https://github.com/xyjoey/PRISM" target="_blank" rel="noopener noreferrer">
+                Built with PRISM
+              </a>
+              <span className="ml-2">🚀</span>
+            </p>
+          </div>
         </div>
       </div>
     </footer>

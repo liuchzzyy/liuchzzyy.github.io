@@ -27,6 +27,16 @@ export async function generateMetadata(): Promise<Metadata> {
       description: config.site.description,
       siteName: `${config.author.name}'s Academic Website`,
     },
+    alternates: {
+      types: {
+        'application/rss+xml': [
+          { url: '/rss/feed.xml', title: 'RSS Feed' },
+        ],
+        'application/atom+xml': [
+          { url: '/rss/feed-atom.xml', title: 'Atom Feed' },
+        ],
+      },
+    },
   };
 }
 
