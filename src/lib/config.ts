@@ -46,11 +46,30 @@ export interface SiteConfig {
     }>;
 }
 
-const CONFIG_PATH = path.join(process.cwd(), 'content', 'config.toml');
+const CONTENT_DIR = path.join(process.cwd(), 'content');
 
-export function getConfig(): SiteConfig {
+// Helper to get language-aware config path
+function getConfigPath(language?: string): string {
+    if (!language || language === 'en') {
+        return path.join(CONTENT_DIR, 'config.toml');
+    }
+    
+    // Try to find a language-specific config file (e.g., config.zh.toml)
+    const localizedFilename = `config.${language}.toml`;
+    const localizedPath = path.join(CONTENT_DIR, localizedFilename);
+    
+    // Check if the localized file exists, otherwise fallback to default
+    if (fs.existsSync(localizedPath)) {
+        return localizedPath;
+    }
+    
+    return path.join(CONTENT_DIR, 'config.toml');
+}
+
+export function getConfig(language?: string): SiteConfig {
     try {
-        const fileContent = fs.readFileSync(CONFIG_PATH, 'utf-8');
+        const configPath = getConfigPath(language);
+        const fileContent = fs.readFileSync(configPath, 'utf-8');
         const config = parse(fileContent) as unknown as SiteConfig;
         return config;
     } catch (error) {

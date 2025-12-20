@@ -35,12 +35,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const config = getConfig();
+  const configEn = getConfig('en');
+  const configZh = getConfig('zh');
 
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
-        <link rel="icon" href={config.site.favicon} type="image/svg+xml" />
+        <link rel="icon" href={configEn.site.favicon} type="image/svg+xml" />
         {/* Speed up font connections */}
         <link rel="dns-prefetch" href="https://google-fonts.jialeliu.com" />
         <link rel="preconnect" href="https://google-fonts.jialeliu.com" crossOrigin="" />
@@ -100,14 +101,15 @@ export default function RootLayout({
       <body className={`font-sans antialiased`}>
         <ThemeProvider>
           <Navigation
-            items={config.navigation}
-            siteTitle={config.site.title}
-            enableOnePageMode={config.features.enable_one_page_mode}
+            items={configEn.navigation}
+            siteTitleEn={configEn.site.title}
+            siteTitleZh={configZh.site.title}
+            enableOnePageMode={configEn.features.enable_one_page_mode}
           />
           <main className="min-h-screen pt-16 lg:pt-20">
             {children}
           </main>
-          <Footer lastUpdated={config.site.last_updated} />
+          <Footer lastUpdatedEn={configEn.site.last_updated} lastUpdatedZh={configZh.site.last_updated} />
         </ThemeProvider>
       </body>
     </html>

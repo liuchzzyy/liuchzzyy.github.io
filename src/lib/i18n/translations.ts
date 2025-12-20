@@ -12,6 +12,7 @@ export const translations = {
       readMore: 'Read More',
       viewAll: 'View All',
       loading: 'Loading...',
+      lastUpdated: 'Last updated:',
     },
     home: {
       researchInterests: 'Research Interests',
@@ -33,6 +34,7 @@ export const translations = {
       readMore: '阅读更多',
       viewAll: '查看全部',
       loading: '加载中...',
+      lastUpdated: '最后更新：',
     },
     home: {
       researchInterests: '研究兴趣',
