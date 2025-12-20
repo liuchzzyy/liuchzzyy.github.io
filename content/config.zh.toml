@@ -1,14 +1,14 @@
 [site]
 title = "刘城 - 个人主页"
 description = "西班牙 ICMAB-CSIC 博士生。"
-favicon = "/docs/static/favicon.svg"
+favicon = "/docs/assets/images/favicon.svg"
 last_updated = "2025年11月20日"
 
 [author]
 name = "刘城"
 title = "博士生"
 institution = "西班牙 ICMAB-CSIC"
-avatar = "/docs/static/bio.jpg"
+avatar = "/docs/assets/images/bio.jpg"
 
 [social]
 # Contact information (leave blank or delete to hide)
