@@ -27,12 +27,12 @@ export default function ListPage({ config, embedded = false }: { config: ListPag
             </div>
 
             <div className="space-y-6">
-                {sortedItems.map((item, index) => (
+                {sortedItems.map((item) => (
                     <motion.div
-                        key={index}
+                        key={`${item.date}-${item.content.substring(0, 20)}`}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.4, delay: 0.1 * index }}
+                        transition={{ duration: 0.4, delay: 0.1 * sortedItems.indexOf(item) }}
                         className="bg-white dark:bg-neutral-900 p-6 rounded-xl shadow-sm border border-neutral-200 dark:border-neutral-800 hover:shadow-md transition-all duration-200"
                     >
                         <div className="flex items-start space-x-4">

@@ -4,14 +4,14 @@ import { parseBibTeX } from '@/lib/bibtexParser';
 import Profile from '@/components/home/Profile';
 import About from '@/components/home/About';
 import SelectedPublications from '@/components/home/SelectedPublications';
-import News, { NewsItem } from '@/components/home/News';
+import News from '@/components/home/News';
 import PublicationsList from '@/components/publications/PublicationsList';
 import TextPage from '@/components/pages/TextPage';
 import CardPage from '@/components/pages/CardPage';
 import ListPage from '@/components/pages/ListPage';
 
 import { Publication } from '@/types/publication';
-import { BasePageConfig, PublicationPageConfig, TextPageConfig, CardPageConfig, ListPageConfig } from '@/types/page';
+import { BasePageConfig, PublicationPageConfig, TextPageConfig, CardPageConfig, ListPageConfig, NewsItem } from '@/types/page';
 
 // Define types for section config
 interface SectionConfig {
