@@ -25,7 +25,3 @@ The following outlines commonly used methods, tools, and workflows for future re
 
 - Spectroscopy analysis (Raman / IR): Spectral preprocessing, background correction, peak fitting procedures.
 - Structural characterization (XRD): Diffraction pattern processing and peak assignment.
-
----
-
-You can add specific toolchain details, command examples, or installation instructions for external dependencies here. If desired, common code snippets (e.g., commands for running LAMMPS in parallel, or Python data processing templates) can also be included in this document.

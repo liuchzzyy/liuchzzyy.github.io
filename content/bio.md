@@ -1,3 +1,5 @@
-I am a PhD student at the Department of Solid-State Chemistry (SSC), Institute of Materials Science of Barcelona (ICMAB-CSIC), Spain, advised by [Dr. Dino Tonti](https://icmab.es/tonti-dino-permanent-researchers).
+I am a PhD student at the School of Science, University of Example, advised by [Prof. Advisor One](https://example.com) and [Dr. Advisor Two](https://example.com).
 
-Prior to this, I obtained a M.Sc. degree with Prof. Xiaobo Ji in Central South University (CSU), China.
+Prior to this, I obtained a BSc degree with First Class Honours in Natural Science from the University of Example.
+
+My current research focuses on investigating the mathematical principles of natural philosophy.

@@ -1,3 +1,5 @@
-我是西班牙巴塞罗那材料科学研究所（ICMAB-CSIC）固态化学系（SSC）的博士生，导师是 [Dr. Dino Tonti](https://icmab.es/tonti-dino-permanent-researchers)。
+我是埃克斯普尔大学理学院的博士生，导师是[教授导师一](https://example.com)和[博士导师二](https://example.com)。
 
-在此之前，我在中国中南大学（CSU）获得了硕士学位，导师是纪效波教授。
+此前，我获得了埃克斯普尔大学自然科学专业的理学学士学位（一级荣誉）。
+
+我目前的研究方向是探索自然哲学的数学原理。
