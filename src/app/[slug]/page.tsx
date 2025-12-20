@@ -1,11 +1,7 @@
-import { notFound } from 'next/navigation';
 import { getPageConfig, getMarkdownContent, getBibtexContent } from '@/lib/content';
 import { getConfig } from '@/lib/config';
 import { parseBibTeX } from '@/lib/bibtexParser';
-import PublicationsList from '@/components/publications/PublicationsList';
-import TextPage from '@/components/pages/TextPage';
-import CardPage from '@/components/pages/CardPage';
-import ListPage from '@/components/pages/ListPage';
+import ClientDynamicPage from '@/components/ClientDynamicPage';
 import {
     BasePageConfig,
     PublicationPageConfig,
@@ -44,39 +40,45 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     };
 }
 
+function loadPageContentForLanguage(slug: string, language: string) {
+    const pageConfig = getPageConfig(slug, language) as BasePageConfig | null;
+    if (!pageConfig) return null;
+
+    if (pageConfig.type === 'publication') {
+        const pubConfig = pageConfig as PublicationPageConfig;
+        const bibtex = getBibtexContent(pubConfig.source, language);
+        return {
+            type: 'publication' as const,
+            config: pubConfig,
+            publications: parseBibTeX(bibtex)
+        };
+    } else if (pageConfig.type === 'text') {
+        const textConfig = pageConfig as TextPageConfig;
+        return {
+            type: 'text' as const,
+            config: textConfig,
+            content: getMarkdownContent(textConfig.source, language)
+        };
+    } else if (pageConfig.type === 'card') {
+        return {
+            type: 'card' as const,
+            config: pageConfig as CardPageConfig
+        };
+    } else if (pageConfig.type === 'list') {
+        return {
+            type: 'list' as const,
+            config: pageConfig as ListPageConfig
+        };
+    }
+    return null;
+}
+
 export default async function DynamicPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
-    const pageConfig = getPageConfig(slug) as BasePageConfig | null;
+    
+    // Load content for both languages
+    const enContent = loadPageContentForLanguage(slug, 'en');
+    const zhContent = loadPageContentForLanguage(slug, 'zh');
 
-    if (!pageConfig) {
-        notFound();
-    }
-
-    return (
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            {pageConfig.type === 'publication' && (
-                <PublicationPage config={pageConfig as PublicationPageConfig} />
-            )}
-            {pageConfig.type === 'text' && (
-                <TextPageWrapper config={pageConfig as TextPageConfig} />
-            )}
-            {pageConfig.type === 'card' && (
-                <CardPage config={pageConfig as CardPageConfig} />
-            )}
-            {pageConfig.type === 'list' && (
-                <ListPage config={pageConfig as ListPageConfig} />
-            )}
-        </div>
-    );
-}
-
-function PublicationPage({ config }: { config: PublicationPageConfig }) {
-    const bibtex = getBibtexContent(config.source);
-    const publications = parseBibTeX(bibtex);
-    return <PublicationsList config={config} publications={publications} />;
-}
-
-function TextPageWrapper({ config }: { config: TextPageConfig }) {
-    const content = getMarkdownContent(config.source);
-    return <TextPage config={config} content={content} />;
+    return <ClientDynamicPage enContent={enContent} zhContent={zhContent} />;
 }
