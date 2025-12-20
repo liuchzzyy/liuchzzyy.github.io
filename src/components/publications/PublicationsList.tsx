@@ -201,7 +201,7 @@ export default function PublicationsList({ config, publications, embedded = fals
                                     <div className="w-full md:w-48 flex-shrink-0">
                                         <div className="aspect-video md:aspect-[4/3] relative rounded-lg overflow-hidden bg-neutral-100 dark:bg-neutral-800">
                                             <Image
-                                                src={`/docs/public/papers/${pub.preview}`}
+                                                src={`/docs/assets/papers/${pub.preview}`}
                                                 alt={pub.title}
                                                 fill
                                                 className="object-cover"
