@@ -1,14 +1,14 @@
 [site]
 title = "I am Cheng Liu"
 description = "PhD student at ICMAB-CSIC, Spain."
-favicon = "docs/static/favicon.svg"
+favicon = "/docs/static/favicon.svg"
 last_updated = "November 18, 2025"
 
 [author]
 name = "Cheng Liu"
 title = "PhD Student"
 institution = "ICMAB-CSIC, Spain"
-avatar = "docs/static/bio.jpg"
+avatar = "/docs/static/bio.jpg"
 
 [social]
 # Contact information (leave blank or delete to hide)
