@@ -8,7 +8,9 @@ import { Disclosure } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { cn } from '@/lib/utils';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
+import { LanguageToggle } from '@/components/ui/LanguageToggle';
 import { SiteConfig } from '@/lib/config';
+import { useLanguageStore } from '@/lib/stores/languageStore';
 
 interface NavigationProps {
   items: SiteConfig['navigation'];
@@ -16,10 +18,39 @@ interface NavigationProps {
   enableOnePageMode?: boolean;
 }
 
+// Translation mappings for navigation items
+const navTranslations: Record<string, Record<string, string>> = {
+  'About Me': { zh: '关于我', en: 'About Me' },
+  'Publications': { zh: '发表论文', en: 'Publications' },
+  'Projects': { zh: '项目', en: 'Projects' },
+  'News': { zh: '新闻', en: 'News' },
+  'Techniques': { zh: '技术', en: 'Techniques' },
+  'Resume': { zh: '简历', en: 'Resume' },
+};
+
+const titleTranslations: Record<string, Record<string, string>> = {
+  'Here is Cheng Liu': { zh: '刘程的主页', en: 'Here is Cheng Liu' },
+};
+
 export default function Navigation({ items, siteTitle, enableOnePageMode }: NavigationProps) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [activeHash, setActiveHash] = useState('');
+  const { language } = useLanguageStore();
+
+  const getTranslatedTitle = (title: string): string => {
+    if (titleTranslations[title] && titleTranslations[title][language]) {
+      return titleTranslations[title][language];
+    }
+    return title;
+  };
+
+  const getTranslatedNavTitle = (title: string): string => {
+    if (navTranslations[title] && navTranslations[title][language]) {
+      return navTranslations[title][language];
+    }
+    return title;
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -105,7 +136,7 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                     href="/"
                     className="text-xl lg:text-2xl font-serif font-semibold text-primary hover:text-accent transition-colors duration-200"
                   >
-                    {siteTitle}
+                    {getTranslatedTitle(siteTitle)}
                   </Link>
                 </motion.div>
 
@@ -137,7 +168,7 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                                 : 'text-neutral-600 hover:text-primary'
                             )}
                           >
-                            <span className="relative z-10">{item.title}</span>
+                            <span className="relative z-10">{getTranslatedNavTitle(item.title)}</span>
                             {isActive && (
                               <motion.div
                                 layoutId="activeTab"
@@ -154,12 +185,16 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                         );
                       })}
                     </div>
-                    <ThemeToggle />
+                    <div className="flex items-center space-x-2">
+                      <LanguageToggle />
+                      <ThemeToggle />
+                    </div>
                   </div>
                 </div>
 
                 {/* Mobile menu button and theme toggle */}
                 <div className="lg:hidden flex items-center space-x-2">
+                  <LanguageToggle />
                   <ThemeToggle />
                   <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-neutral-600 hover:text-primary hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent transition-colors duration-200">
                     <span className="sr-only">Open main menu</span>
@@ -221,7 +256,7 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                                 : 'text-neutral-600 hover:text-primary hover:bg-neutral-50'
                             )}
                           >
-                            {item.title}
+                            {getTranslatedNavTitle(item.title)}
                           </Disclosure.Button>
                         </motion.div>
                       );

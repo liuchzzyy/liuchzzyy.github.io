@@ -1,0 +1,13 @@
+type = "list"
+title = "新闻"
+description = "最新动态和公告"
+
+[[items]]
+date = "2025-11-01"
+content = "我们的工作已被著名期刊接收 🎉"
+image = "example.png"
+
+[[items]]
+date = "2025-09-01"
+content = "在示例大学开始我的博士学习"
+image = "example.png"

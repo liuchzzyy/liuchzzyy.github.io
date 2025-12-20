@@ -3,8 +3,23 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { ListPageConfig } from '@/types/page';
+import { useLanguageStore } from '@/lib/stores/languageStore';
+
+const titleTranslations: Record<string, Record<string, string>> = {
+    'News': { zh: '新闻', en: 'News' },
+    'Latest updates and announcements.': { zh: '最新动态和公告', en: 'Latest updates and announcements.' },
+};
 
 export default function ListPage({ config, embedded = false }: { config: ListPageConfig; embedded?: boolean }) {
+    const { language } = useLanguageStore();
+    
+    const getTranslatedText = (text: string): string => {
+        if (titleTranslations[text] && titleTranslations[text][language]) {
+            return titleTranslations[text][language];
+        }
+        return text;
+    };
+    
     // sort items by date descending (newest first)
     const sortedItems = config.items.slice().sort((a, b) => {
         const ta = new Date(a.date).getTime();
@@ -19,10 +34,10 @@ export default function ListPage({ config, embedded = false }: { config: ListPag
             transition={{ duration: 0.6, delay: 0.4 }}
         >
             <div className={embedded ? "mb-4" : "mb-8"}>
-                <h1 className={`${embedded ? "text-2xl" : "text-4xl"} font-serif font-bold text-primary mb-4`}>{config.title}</h1>
+                <h1 className={`${embedded ? "text-2xl" : "text-4xl"} font-serif font-bold text-primary mb-4`}>{getTranslatedText(config.title)}</h1>
                 {config.description && (
                     <p className={`${embedded ? "text-base" : "text-lg"} text-neutral-600 dark:text-neutral-500 max-w-2xl`}>
-                        {config.description}
+                        {getTranslatedText(config.description)}
                     </p>
                 )}
             </div>

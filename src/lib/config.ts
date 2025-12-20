@@ -48,9 +48,20 @@ export interface SiteConfig {
 
 const CONFIG_PATH = path.join(process.cwd(), 'content', 'config.toml');
 
-export function getConfig(): SiteConfig {
+export function getConfig(language?: 'en' | 'zh'): SiteConfig {
     try {
-        const fileContent = fs.readFileSync(CONFIG_PATH, 'utf-8');
+        const configFile = language === 'zh' ? 'config_zh.toml' : 'config.toml';
+        const configPath = path.join(process.cwd(), 'content', configFile);
+        
+        // Try to load language-specific config, fallback to default
+        let fileContent: string;
+        try {
+            fileContent = fs.readFileSync(configPath, 'utf-8');
+        } catch {
+            // Fallback to default config if language-specific config doesn't exist
+            fileContent = fs.readFileSync(CONFIG_PATH, 'utf-8');
+        }
+        
         const config = parse(fileContent) as unknown as SiteConfig;
         return config;
     } catch (error) {
