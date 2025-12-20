@@ -11,6 +11,7 @@ import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { LanguageToggle } from '@/components/ui/LanguageToggle';
 import { SiteConfig } from '@/lib/config';
 import { useLanguageStore } from '@/lib/stores/languageStore';
+import { useTranslation } from '@/lib/translations';
 
 interface NavigationProps {
   items: SiteConfig['navigation'];
@@ -18,36 +19,33 @@ interface NavigationProps {
   enableOnePageMode?: boolean;
 }
 
-// Translation mappings for navigation items
-const navTranslations: Record<string, Record<string, string>> = {
-  'About Me': { zh: '关于我', en: 'About Me' },
-  'Publications': { zh: '发表论文', en: 'Publications' },
-  'Projects': { zh: '项目', en: 'Projects' },
-  'News': { zh: '新闻', en: 'News' },
-  'Techniques': { zh: '技术', en: 'Techniques' },
-  'Resume': { zh: '简历', en: 'Resume' },
-};
-
-const titleTranslations: Record<string, Record<string, string>> = {
-  'Here is Cheng Liu': { zh: '刘程的主页', en: 'Here is Cheng Liu' },
-};
-
 export default function Navigation({ items, siteTitle, enableOnePageMode }: NavigationProps) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [activeHash, setActiveHash] = useState('');
   const { language } = useLanguageStore();
+  const t = useTranslation(language);
 
   const getTranslatedTitle = (title: string): string => {
-    if (titleTranslations[title] && titleTranslations[title][language]) {
-      return titleTranslations[title][language];
+    if (title === 'Here is Cheng Liu') {
+      return t('site.title');
     }
     return title;
   };
 
   const getTranslatedNavTitle = (title: string): string => {
-    if (navTranslations[title] && navTranslations[title][language]) {
-      return navTranslations[title][language];
+    const keyMap: Record<string, keyof typeof import('@/lib/translations').translations.en> = {
+      'About Me': 'nav.about',
+      'Publications': 'nav.publications',
+      'Projects': 'nav.projects',
+      'News': 'nav.news',
+      'Techniques': 'nav.techniques',
+      'Resume': 'nav.resume',
+    };
+    
+    const key = keyMap[title];
+    if (key) {
+      return t(key);
     }
     return title;
   };

@@ -4,18 +4,18 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { ListPageConfig } from '@/types/page';
 import { useLanguageStore } from '@/lib/stores/languageStore';
-
-const titleTranslations: Record<string, Record<string, string>> = {
-    'News': { zh: '新闻', en: 'News' },
-    'Latest updates and announcements.': { zh: '最新动态和公告', en: 'Latest updates and announcements.' },
-};
+import { useTranslation } from '@/lib/translations';
 
 export default function ListPage({ config, embedded = false }: { config: ListPageConfig; embedded?: boolean }) {
     const { language } = useLanguageStore();
+    const t = useTranslation(language);
     
     const getTranslatedText = (text: string): string => {
-        if (titleTranslations[text] && titleTranslations[text][language]) {
-            return titleTranslations[text][language];
+        if (text === 'News') {
+            return t('news.title');
+        }
+        if (text === 'Latest updates and announcements.') {
+            return t('news.description');
         }
         return text;
     };

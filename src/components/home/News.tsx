@@ -3,24 +3,22 @@
 import { motion } from 'framer-motion';
 import { NewsItem } from '@/types/page';
 import { useLanguageStore } from '@/lib/stores/languageStore';
+import { useTranslation } from '@/lib/translations';
 
 interface NewsProps {
     items: NewsItem[];
     title?: string;
 }
 
-const titleTranslations: Record<string, Record<string, string>> = {
-    'News': { zh: '新闻', en: 'News' },
-};
-
 export default function News({ items, title = 'News' }: NewsProps) {
     const { language } = useLanguageStore();
+    const t = useTranslation(language);
     
-    const getTranslatedTitle = (t: string): string => {
-        if (titleTranslations[t] && titleTranslations[t][language]) {
-            return titleTranslations[t][language];
+    const getTranslatedTitle = (titleText: string): string => {
+        if (titleText === 'News') {
+            return t('news.title');
         }
-        return t;
+        return titleText;
     };
     
     // sort items by date descending (newest first)

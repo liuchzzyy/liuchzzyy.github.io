@@ -6,6 +6,9 @@ export type TranslationKey = keyof typeof translations.en;
 // All translations
 export const translations = {
   en: {
+    // Site
+    'site.title': 'Here is Cheng Liu',
+    
     // Navigation
     'nav.about': 'About Me',
     'nav.publications': 'Publications',
@@ -20,7 +23,12 @@ export const translations = {
     'common.download': 'Download',
     
     // Footer
-    'footer.lastUpdated': 'Last Updated',
+    'footer.lastUpdated': 'Last updated',
+    'footer.builtWith': 'Built with PRISM',
+    
+    // News
+    'news.title': 'News',
+    'news.description': 'Latest updates and announcements.',
     
     // Theme
     'theme.system': 'System',
@@ -32,6 +40,9 @@ export const translations = {
     'language.chinese': '中文',
   },
   zh: {
+    // Site
+    'site.title': '刘程的主页',
+    
     // Navigation
     'nav.about': '关于我',
     'nav.publications': '发表论文',
@@ -47,6 +58,11 @@ export const translations = {
     
     // Footer
     'footer.lastUpdated': '最后更新',
+    'footer.builtWith': '使用 PRISM 构建',
+    
+    // News
+    'news.title': '新闻',
+    'news.description': '最新动态和公告',
     
     // Theme
     'theme.system': '系统',
