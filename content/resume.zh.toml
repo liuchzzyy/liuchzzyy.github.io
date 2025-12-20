@@ -1,0 +1,4 @@
+type = "text"
+title = "简历"
+description = "个人简历"
+source = "resume.zh.md"
