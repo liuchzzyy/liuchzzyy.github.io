@@ -47,7 +47,7 @@ export function LanguageToggle() {
           className="flex items-center gap-1.5"
         >
           <GlobeAltIcon className="h-4 w-4" />
-          <span className="text-sm font-medium">{language === 'en' ? 'EN' : '中'}</span>
+          <span className="text-sm font-medium">{language === 'en' ? '中文' : 'EN'}</span>
         </motion.div>
       </motion.button>
     </div>
