@@ -20,24 +20,14 @@ export default function Footer({ lastUpdatedEn, lastUpdatedZh }: FooterProps) {
             {t.common.lastUpdated} {lastUpdated || new Date().toLocaleDateString(language === 'zh' ? 'zh-CN' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
           </p>
           <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <a 
-                href="/rss/publications.xml" 
-                className="text-xs text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300 flex items-center gap-1"
-                title="Publications RSS Feed"
-              >
-                <Rss className="w-3 h-3" />
-                Publications
-              </a>
-              <a 
-                href="/rss/news.xml" 
-                className="text-xs text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300 flex items-center gap-1"
-                title="News RSS Feed"
-              >
-                <Rss className="w-3 h-3" />
-                News
-              </a>
-            </div>
+            <a 
+              href="/rss/feed.xml" 
+              className="text-xs text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300 flex items-center gap-1"
+              title="RSS Feed"
+            >
+              <Rss className="w-3 h-3" />
+              RSS
+            </a>
             <p className="text-xs text-neutral-500 flex items-center">
               <a href="https://github.com/xyjoey/PRISM" target="_blank" rel="noopener noreferrer">
                 Built with PRISM

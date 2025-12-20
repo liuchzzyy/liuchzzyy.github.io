@@ -30,12 +30,10 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: {
       types: {
         'application/rss+xml': [
-          { url: '/rss/publications.xml', title: 'Publications RSS Feed' },
-          { url: '/rss/news.xml', title: 'News RSS Feed' },
+          { url: '/rss/feed.xml', title: 'RSS Feed' },
         ],
         'application/atom+xml': [
-          { url: '/rss/publications-atom.xml', title: 'Publications Atom Feed' },
-          { url: '/rss/news-atom.xml', title: 'News Atom Feed' },
+          { url: '/rss/feed-atom.xml', title: 'Atom Feed' },
         ],
       },
     },

@@ -65,10 +65,10 @@ async function generateRSSFeeds() {
 
   console.log('Generating RSS feeds...');
 
-  // Publications Feed
-  const publicationsFeed = new Feed({
-    title: `${config.site.title} - Publications`,
-    description: `Latest publications from ${config.author.name}`,
+  // Unified Feed - Combining publications and news
+  const unifiedFeed = new Feed({
+    title: config.site.title,
+    description: `Latest updates from ${config.author.name}`,
     id: `${siteUrl}/`,
     link: `${siteUrl}/`,
     language: 'en',
@@ -78,8 +78,8 @@ async function generateRSSFeeds() {
     updated: new Date(),
     generator: 'PRISM RSS Generator',
     feedLinks: {
-      rss2: `${siteUrl}/rss/publications.xml`,
-      atom: `${siteUrl}/rss/publications-atom.xml`,
+      rss2: `${siteUrl}/rss/feed.xml`,
+      atom: `${siteUrl}/rss/feed-atom.xml`,
     },
     author: {
       name: config.author.name,
@@ -87,77 +87,81 @@ async function generateRSSFeeds() {
     },
   });
 
+  // Collect all items
+  const allItems = [];
+
+  // Add publications
   const publications = loadPublications('en');
-  publications.slice(0, 20).forEach((pub) => {
+  publications.forEach((pub) => {
     const year = pub.fields.year || new Date().getFullYear();
     const month = pub.fields.month || 'jan';
     const monthMap = { jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5, jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11 };
     const pubDate = new Date(parseInt(year), monthMap[month.toLowerCase()] || 0);
     
-    let description = `<p><strong>Authors:</strong> ${pub.fields.author || 'Unknown'}</p>`;
-    if (pub.fields.abstract) description += `<p>${pub.fields.abstract}</p>`;
-    if (pub.fields.journal) description += `<p><strong>Journal:</strong> ${pub.fields.journal}</p>`;
-    if (pub.fields.booktitle) description += `<p><strong>Conference:</strong> ${pub.fields.booktitle}</p>`;
-    if (pub.fields.doi) description += `<p><strong>DOI:</strong> <a href="https://doi.org/${pub.fields.doi}">${pub.fields.doi}</a></p>`;
-
-    publicationsFeed.addItem({
-      title: pub.fields.title || 'Untitled',
-      id: pub.key,
-      link: `${siteUrl}/publications/#${pub.key}`,
-      description: description,
-      content: description,
-      author: [{ name: config.author.name, email: config.social.email }],
+    allItems.push({
+      type: 'publication',
       date: pubDate,
+      data: pub
     });
   });
 
-  fs.writeFileSync(path.join(outDir, 'publications.xml'), publicationsFeed.rss2());
-  console.log('✓ Generated publications.xml');
-
-  fs.writeFileSync(path.join(outDir, 'publications-atom.xml'), publicationsFeed.atom1());
-  console.log('✓ Generated publications-atom.xml');
-
-  // News Feed
-  const newsFeed = new Feed({
-    title: `${config.site.title} - News & Updates`,
-    description: `Latest news and updates from ${config.author.name}`,
-    id: `${siteUrl}/`,
-    link: `${siteUrl}/`,
-    language: 'en',
-    image: `${siteUrl}${config.author.avatar}`,
-    favicon: `${siteUrl}${config.site.favicon}`,
-    copyright: `All rights reserved ${new Date().getFullYear()}, ${config.author.name}`,
-    updated: new Date(),
-    generator: 'PRISM RSS Generator',
-    feedLinks: {
-      rss2: `${siteUrl}/rss/news.xml`,
-      atom: `${siteUrl}/rss/news-atom.xml`,
-    },
-    author: {
-      name: config.author.name,
-      email: config.social.email,
-    },
-  });
-
+  // Add news items
   const newsItems = loadNews('en');
-  newsItems.slice(0, 20).forEach((item, index) => {
-    const newsDate = new Date(item.date);
-    newsFeed.addItem({
-      title: item.content,
-      id: `news-${index}`,
-      link: item.url || `${siteUrl}/news/`,
-      description: item.content,
-      content: item.content,
-      author: [{ name: config.author.name, email: config.social.email }],
-      date: newsDate,
+  newsItems.forEach((item) => {
+    allItems.push({
+      type: 'news',
+      date: new Date(item.date),
+      data: item
     });
   });
 
-  fs.writeFileSync(path.join(outDir, 'news.xml'), newsFeed.rss2());
-  console.log('✓ Generated news.xml');
+  // Sort by date (newest first)
+  allItems.sort((a, b) => b.date.getTime() - a.date.getTime());
 
-  fs.writeFileSync(path.join(outDir, 'news-atom.xml'), newsFeed.atom1());
-  console.log('✓ Generated news-atom.xml');
+  // Add items to feed (limit to most recent 20)
+  allItems.slice(0, 20).forEach((item, index) => {
+    if (item.type === 'publication') {
+      const pub = item.data;
+      let description = `<p><strong>Type:</strong> Publication</p>`;
+      description += `<p><strong>Authors:</strong> ${pub.fields.author || 'Unknown'}</p>`;
+      if (pub.fields.abstract) description += `<p>${pub.fields.abstract}</p>`;
+      if (pub.fields.journal) description += `<p><strong>Journal:</strong> ${pub.fields.journal}</p>`;
+      if (pub.fields.booktitle) description += `<p><strong>Conference:</strong> ${pub.fields.booktitle}</p>`;
+      if (pub.fields.doi) description += `<p><strong>DOI:</strong> <a href="https://doi.org/${pub.fields.doi}">${pub.fields.doi}</a></p>`;
+
+      unifiedFeed.addItem({
+        title: `[Publication] ${pub.fields.title || 'Untitled'}`,
+        id: pub.key,
+        link: `${siteUrl}/publications/#${pub.key}`,
+        description: description,
+        content: description,
+        author: [{ name: config.author.name, email: config.social.email }],
+        date: item.date,
+        category: [{ name: 'publication' }],
+      });
+    } else {
+      const newsItem = item.data;
+      let description = `<p><strong>Type:</strong> News</p>`;
+      description += `<p>${newsItem.content}</p>`;
+
+      unifiedFeed.addItem({
+        title: `[News] ${newsItem.content.substring(0, 100)}${newsItem.content.length > 100 ? '...' : ''}`,
+        id: `news-${index}`,
+        link: `${siteUrl}/news/`,
+        description: description,
+        content: description,
+        author: [{ name: config.author.name, email: config.social.email }],
+        date: item.date,
+        category: [{ name: 'news' }],
+      });
+    }
+  });
+
+  fs.writeFileSync(path.join(outDir, 'feed.xml'), unifiedFeed.rss2());
+  console.log('✓ Generated feed.xml');
+
+  fs.writeFileSync(path.join(outDir, 'feed-atom.xml'), unifiedFeed.atom1());
+  console.log('✓ Generated feed-atom.xml');
 
   console.log('RSS feed generation complete.');
 }
