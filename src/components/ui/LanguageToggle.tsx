@@ -40,9 +40,9 @@ export function LanguageToggle() {
     >
       <motion.div
         key={language}
-        initial={{ rotate: -180, opacity: 0 }}
-        animate={{ rotate: 0, opacity: 1 }}
-        transition={{ duration: 0.3 }}
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.2 }}
       >
         <LanguageIcon className="h-4 w-4" />
       </motion.div>
