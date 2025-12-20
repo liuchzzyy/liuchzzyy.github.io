@@ -30,8 +30,8 @@ export const useLanguageStore = create<LanguageStore>()(
         }
         return {
           getItem: () => null,
-          setItem: () => { },
-          removeItem: () => { },
+          setItem: () => {},
+          removeItem: () => {},
         };
       }),
     }
