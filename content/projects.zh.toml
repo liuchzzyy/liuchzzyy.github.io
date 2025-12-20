@@ -1,0 +1,30 @@
+type = "card"
+title = "项目"
+description = "精选的研究项目和实现的工具。"
+
+[[items]]
+title = "多尺度热传输模拟"
+subtitle = "从原子尺度到宏观尺度的热传输建模"
+date = "2024-06"
+content = "使用分子动力学 (MD) 与有限元 (FEM) 联合建模研究纳米材料中的热传导机制；负责数值方法实现、并行化优化与结果可视化。"
+tags = ["分子动力学", "有限元", "GPU"]
+link = "/projects/multiscale-thermal-transport"
+image = "/docs/public/projects/thermal-transport.png"
+
+[[items]]
+title = "大规模特征值问题的高效求解器"
+subtitle = "用于材料模拟的高效特征值求解器"
+date = "2023-11"
+content = "设计并实现基于稀疏矩阵的迭代求解器（包含预条件与分布式计算支持），提高了大规模第一性原理计算中的收敛性能。"
+tags = ["数值方法", "线性代数", "并行计算"]
+link = "/projects/eigen-solvers"
+image = "/docs/public/projects/eigen-solvers.png"
+
+[[items]]
+title = "实验谱图的数据驱动分析"
+subtitle = "结合机器学习的谱图解析流程"
+date = "2022-09"
+content = "构建从预处理、特征提取到模型拟合的端到端管道，用于分析材料表征数据（Raman/IR/XRD），并提供可复现的 Jupyter 分析模板。"
+tags = ["数据科学", "python", "机器学习"]
+link = "/projects/spectral-analysis"
+image = "/docs/public/projects/spectral-analysis.png"

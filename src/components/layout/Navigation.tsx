@@ -8,7 +8,10 @@ import { Disclosure } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { cn } from '@/lib/utils';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
+import { LanguageToggle } from '@/components/ui/LanguageToggle';
 import { SiteConfig } from '@/lib/config';
+import { useTranslation } from '@/lib/i18n/useTranslation';
+import { type NavTranslationKey } from '@/lib/i18n/translations';
 
 interface NavigationProps {
   items: SiteConfig['navigation'];
@@ -16,10 +19,30 @@ interface NavigationProps {
   enableOnePageMode?: boolean;
 }
 
+// Map of navigation targets to translation keys
+const navTranslationMap: Record<string, NavTranslationKey> = {
+  'about': 'aboutMe',
+  'publications': 'publications',
+  'projects': 'projects',
+  'news': 'news',
+  'techniques': 'techniques',
+  'resume': 'resume',
+};
+
 export default function Navigation({ items, siteTitle, enableOnePageMode }: NavigationProps) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [activeHash, setActiveHash] = useState('');
+  const { t } = useTranslation();
+
+  // Function to get translated title
+  const getNavTitle = (item: SiteConfig['navigation'][0]) => {
+    const translationKey = navTranslationMap[item.target];
+    if (translationKey && t.nav[translationKey]) {
+      return t.nav[translationKey];
+    }
+    return item.title;
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -111,7 +134,7 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
 
                 {/* Desktop Navigation */}
                 <div className="hidden lg:block">
-                  <div className="ml-10 flex items-center space-x-8">
+                  <div className="ml-10 flex items-center space-x-4">
                     <div className="flex items-baseline space-x-8">
                       {items.map((item) => {
                         const isActive = enableOnePageMode
@@ -137,7 +160,7 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                                 : 'text-neutral-600 hover:text-primary'
                             )}
                           >
-                            <span className="relative z-10">{item.title}</span>
+                            <span className="relative z-10">{getNavTitle(item)}</span>
                             {isActive && (
                               <motion.div
                                 layoutId="activeTab"
@@ -154,12 +177,14 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                         );
                       })}
                     </div>
+                    <LanguageToggle />
                     <ThemeToggle />
                   </div>
                 </div>
 
                 {/* Mobile menu button and theme toggle */}
                 <div className="lg:hidden flex items-center space-x-2">
+                  <LanguageToggle />
                   <ThemeToggle />
                   <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-neutral-600 hover:text-primary hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent transition-colors duration-200">
                     <span className="sr-only">Open main menu</span>
@@ -221,7 +246,7 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                                 : 'text-neutral-600 hover:text-primary hover:bg-neutral-50'
                             )}
                           >
-                            {item.title}
+                            {getNavTitle(item)}
                           </Disclosure.Button>
                         </motion.div>
                       );
