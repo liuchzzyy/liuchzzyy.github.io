@@ -4,6 +4,17 @@
 
 ---
 
+<div align="center">
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Next.js](https://img.shields.io/badge/Next.js-15.3-black)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38bdf8)](https://tailwindcss.com/)
+
+</div>
+
+---
+
 **PRISM**（Portfolio & Research Interface Site Maker）是一个基于 Next.js、Tailwind CSS 和 TypeScript 的个人网站模板，适合研究人员、开发者与学者快速搭建作品集与学术主页。此文档为仓库的简洁介绍与快速上手指南。
 
 **如果你喜欢这个项目，请给[原项目](https://github.com/xyjoey/PRISM)一个 Star ⭐️**
@@ -118,7 +129,29 @@ PRISM/
 - **[内容管理说明](content/README.md)** - 如何编辑和组织内容
 - **[部署指南](docs/guides/deployment.md)** - 部署到各种平台的详细步骤
 - **[国际化文档](docs/guides/i18n.md)** - 多语言支持的使用说明
+- **[架构文档](docs/ARCHITECTURE.md)** - 技术架构和设计原则
 - **[文档索引](docs/README.md)** - 完整文档目录
+
+## 🎯 特性亮点
+
+- ✅ **配置驱动**: 无需修改代码，通过 TOML/Markdown/BibTeX 管理内容
+- ✅ **类型安全**: 完整的 TypeScript 支持
+- ✅ **响应式设计**: 适配桌面、平板、移动设备
+- ✅ **深色模式**: 支持明暗主题切换
+- ✅ **多语言**: 中英双语支持
+- ✅ **BibTeX 原生支持**: 自动解析和展示学术论文
+- ✅ **静态导出**: 无需服务器，部署简单
+- ✅ **SEO 优化**: 静态生成，搜索引擎友好
+- ✅ **性能优化**: 代码分割、预渲染、最小化 JS
+
+## 🛠️ 技术栈
+
+- **前端框架**: [Next.js 15.3](https://nextjs.org/) (React 19)
+- **样式**: [Tailwind CSS 4](https://tailwindcss.com/)
+- **语言**: [TypeScript 5.9](https://www.typescriptlang.org/)
+- **动画**: [Framer Motion](https://www.framer.com/motion/)
+- **状态管理**: [Zustand](https://zustand-demo.pmnd.rs/)
+- **内容解析**: TOML, Markdown, BibTeX
 
 ## 许可证
 
