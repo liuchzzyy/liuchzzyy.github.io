@@ -4,7 +4,7 @@
 
 # PRISM
 
-[English](README.md) · **中文** · [在线演示](https://prism-demo.pages.dev) · [更新日志](CHANGELOG.md)
+[English](README.md) · **中文** · [在线主页](https://liuchzzyy.github.io) · [更新日志](CHANGELOG.md)
 
 **如果你喜欢这个项目，请给一个 Star ⭐️**
 
@@ -39,7 +39,7 @@ PRISM 专为**研究人员、开发者和学者**量身打造，只为让你能�
 1.  **克隆仓库：**
 
     ```bash
-    git clone https://github.com/xyjoey/PRISM.git
+    git clone https://github.com/liuchzzyy/PRISM.git
     cd PRISM
     ```
 

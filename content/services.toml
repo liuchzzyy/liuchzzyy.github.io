@@ -1,6 +1,51 @@
 type = "card"
-title = "Services"
-description = "Professional services and community involvement."
+title = "Research Projects"
+description = "Selected research projects and collaborations."
+
+[[items]]
+title = "Operando XAS Analysis for Zn-Mn Batteries"
+subtitle = "Battery chemistry under realistic cycling"
+content = "Workflow for organizing operando XAS spectra, electrochemical traces, sample labels, and derived indicators so that reaction-stage changes can be compared across cycling conditions."
+tags = ["Operando XAS", "Zn-Mn batteries", "Electrochemistry", "Python"]
+
+[[items]]
+title = "Spectral Decomposition and Phase Tracking"
+subtitle = "PCA, EFA, SIMPLISMA, and MCR-ALS workflows"
+content = "Reusable workflows for testing spectral windows, fixed or free reference strategies, concentration initializers, and reconstruction checks in spectroscopy datasets."
+tags = ["MCR-ALS", "PCA", "EFA", "SIMPLISMA"]
+
+[[items]]
+title = "Manuscript-Ready Figure Pipeline"
+subtitle = "From notebooks to reproducible figures"
+content = "Notebook and script patterns for generating aligned electrochemistry-spectroscopy panels, publication figures, and traceable exports for manuscripts and supporting information."
+tags = ["Visualization", "Jupyter", "Matplotlib", "Reproducibility"]
+
+[[items]]
+title = "Research Automation and Literature Workflow"
+subtitle = "Local tools for papers, notes, and references"
+content = "Utilities for local literature monitoring, Zotero-backed citation checks, Markdown notes, and project-specific automation around research writing."
+tags = ["Zotero", "Automation", "Research notes", "CLI"]
+
+[[items]]
+title = "Elaboration of State-of-the-Art Carbon-Sulfur Composites"
+subtitle = "CSIC iMOVE Project IMOVE23074"
+date = "2023-10 – 2023-12"
+content = "Led a short-term project at the University of Rome La Sapienza on carbon-sulfur composites, operando Raman characterization, and PCA/MCR-ALS data analysis."
+tags = ["Aqueous zinc batteries", "Operando Raman", "Data analysis"]
+
+[[items]]
+title = "Local Chemistry for Sustainable and Rechargeable Zn-Metal Batteries"
+subtitle = "AEI SuReZiB Project PID2021124681OB-I00"
+date = "2022-09 – 2025-08"
+content = "Participated in operando experiments, data analysis, and project reporting for sustainable zinc-metal batteries."
+tags = ["Zn-metal batteries", "Operando characterization"]
+
+[[items]]
+title = "Green Chemistry for a Membrane-Free Electrolytic Flow Battery"
+subtitle = "AEI GreenFloBat Project TED2021-132707B-I00"
+date = "2022-12 – 2024-11"
+content = "Participated in experimental design and data analysis for membrane-free flow-battery energy storage."
+tags = ["Flow batteries", "Energy storage"]
 
 [[items]]
 title = "Reviewer"

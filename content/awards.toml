@@ -3,6 +3,24 @@ title = "Awards"
 description = "Honors and awards I have received."
 
 [[items]]
+title = "Best Poster Prize"
+subtitle = "74th Annual Meeting of the International Society of Electrochemistry"
+date = "2023-09"
+content = "Awarded for \"Operando Bidimensional EXAFS Study on Aqueous Zn-MnO2 Batteries\"."
+
+[[items]]
+title = "CSIC iMOVE Project Funding"
+subtitle = "Project IMOVE23074"
+date = "2023"
+content = "Supported a two-month research exchange at the University of Rome La Sapienza."
+
+[[items]]
+title = "Chinese Government Scholarship"
+subtitle = "China Scholarship Council"
+date = "2021–2025"
+content = "Ph.D. scholarship, award number 202106370079."
+
+[[items]]
 title = "Example Award"
 subtitle = "Organization"
 date = "2025"

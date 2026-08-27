@@ -65,7 +65,7 @@ PRISM 也支持使用 GitHub Actions **自动部署到 GitHub Pages**。
 要启用部署：
 
 1. 转到 **Settings (设置) > Pages**，在 **Build and deployment (构建和部署) > Source (来源)** 下，选择 **GitHub Actions**。
-2. 转到 **Actions** 标签页，选择 **"Deploy PRISM to GitHub Pages"**。
+2. 转到 **Actions** 标签页，选择 **"Deploy liuchzzyy.github.io to GitHub Pages"**。
 3. 点击 **"Enable workflow" (启用工作流)**。
 4. 使用 **Run workflow (运行工作流)** 手动运行。
 5. (可选) 要启用推送时自动部署：

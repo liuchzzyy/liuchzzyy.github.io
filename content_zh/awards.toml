@@ -3,6 +3,24 @@ title = "奖项"
 description = "我获得的荣誉与奖项。"
 
 [[items]]
+title = "最佳海报奖"
+subtitle = "第 74 届国际电化学学会（ISE）年会"
+date = "2023-09"
+content = "获奖报告题目为 \"Operando Bidimensional EXAFS Study on Aqueous Zn-MnO2 Batteries\"。"
+
+[[items]]
+title = "CSIC iMOVE 项目资助"
+subtitle = "项目编号 IMOVE23074"
+date = "2023"
+content = "获资助赴罗马第一大学开展两个月短期学术交流。"
+
+[[items]]
+title = "中国政府奖学金"
+subtitle = "国家留学基金管理委员会"
+date = "2021–2025"
+content = "博士阶段奖学金，编号 202106370079。"
+
+[[items]]
 title = "示例奖项"
 subtitle = "颁发机构"
 date = "2025"

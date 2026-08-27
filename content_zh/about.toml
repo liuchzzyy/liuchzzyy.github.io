@@ -3,9 +3,12 @@ title = "关于我"
 
 [profile]
 research_interests = [
-  "计算物理",
-  "数学原理",
-  "定理证明"
+  "水系 Zn–MnO₂ 电池",
+  "固态电解质",
+  "Mn 基正极材料",
+  "原位同步辐射表征",
+  "谱学分解",
+  "数据驱动材料分析"
 ]
 
 [[sections]]
@@ -17,12 +20,12 @@ title = "关于我"
 [[sections]]
 id = "featured_publications"
 type = "publications"
-title = "精选论文"
+title = "代表性论文"
 filter = "selected"
 limit = 5
 
 [[sections]]
 id = "news"
 type = "list"
-title = "动态"
+title = "最新动态"
 source = "news.toml"

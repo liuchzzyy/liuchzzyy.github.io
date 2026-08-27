@@ -4,7 +4,7 @@
 
 # PRISM
 
-**English** · [中文](README_cn.md) · [Demo](https://prism-demo.pages.dev)  · [Changelog](CHANGELOG.md)
+**English** · [中文](README_cn.md) · [Live site](https://liuchzzyy.github.io) · [Changelog](CHANGELOG.md)
 
 **If you like this project, please give it a star ⭐️**
 
@@ -37,7 +37,7 @@ Feel free to customize your own version of PRISM with coding agents.
 1.  **Clone the repository:**
 
     ```bash
-    git clone https://github.com/xyjoey/PRISM.git
+    git clone https://github.com/liuchzzyy/PRISM.git
     cd PRISM
     ```
 

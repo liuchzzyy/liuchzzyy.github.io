@@ -1,19 +1,24 @@
 [site]
-title = "刘嘉乐"
-description = "某某大学博士生个人主页。"
-last_updated = "2025年11月18日"
+title = "刘城博士"
+description = "专注于水系 Zn–MnO₂ 电池与原位表征技术的材料科学研究者。"
+last_updated = "2026年8月27日"
 
 [author]
-name = "刘嘉乐"
-title = "博士生"
-institution = "某某大学"
+name = "刘城博士"
+title = "材料科学博士研究生"
+institution = "巴塞罗那材料科学研究所（ICMAB-CSIC）/ 巴塞罗那自治大学"
 
 [social]
-location = "城市，国家"
+email = "liuchzzyy@163.com"
+location = "西班牙贝利亚特拉"
 location_details = [
-  "理科楼 123 室，",
-  "大学路，城市，国家"
+  "固态化学部（SSC），",
+  "巴塞罗那材料科学研究所（ICMAB-CSIC），",
+  "西班牙贝利亚特拉 08193，Carrer dels Til·lers sn"
 ]
+orcid = "https://orcid.org/0000-0001-8967-1174"
+github = "https://github.com/liuchzzyy"
+google_scholar = "https://scholar.google.com/citations?user=E7pDru4AAAAJ&hl=en"
 
 [[navigation]]
 title = "关于我"
@@ -34,16 +39,16 @@ target = "teaching"
 href = "/teaching"
 
 [[navigation]]
+title = "科研项目"
+type = "page"
+target = "services"
+href = "/services"
+
+[[navigation]]
 title = "奖项"
 type = "page"
 target = "awards"
 href = "/awards"
-
-[[navigation]]
-title = "服务"
-type = "page"
-target = "services"
-href = "/services"
 
 [[navigation]]
 title = "简历"

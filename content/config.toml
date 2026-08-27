@@ -1,28 +1,27 @@
 [site]
-title = "Jiale Liu"
-description = "PhD student at the University of Example."
+title = "Dr. Cheng Liu"
+description = "Researcher in aqueous Zn–MnO₂ batteries and operando characterization."
 favicon = "/favicon.svg"
-last_updated = "November 18, 2025"
+last_updated = "August 27, 2026"
 
 [author]
-name = "Jiale Liu"
-title = "PhD Student"
-institution = "University of Example"
+name = "Dr. Cheng Liu"
+title = "Ph.D. Candidate in Materials Science"
+institution = "ICMAB-CSIC & Universitat Autònoma de Barcelona"
 avatar = "/bio.jpg"
 
 [social]
-# Contact information (leave blank or delete to hide)
-
-email = "john.doe@example.com"
-location = "City, Country"
+email = "liuchzzyy@gmail.com"
+location = "Bellaterra, Spain"
 location_url = "https://maps.google.com"
 location_details = [
-  "Room 123, Science Building,",
-  "University Avenue, City, Country"
+  "Department of Solid-State Chemistry (SSC),",
+  "Institute of Materials Science of Barcelona (ICMAB-CSIC),",
+  "Carrer dels Til·lers sn, 08193 Bellaterra, Spain"
 ]
-google_scholar = "https://scholar.google.com"
-orcid = "https://orcid.org"
-github = "https://github.com"
+google_scholar = "https://scholar.google.com/citations?user=E7pDru4AAAAJ&hl=en"
+orcid = "https://orcid.org/0000-0001-8967-1174"
+github = "https://github.com/liuchzzyy"
 linkedin = "https://linkedin.com"
 
 [features]
@@ -67,16 +66,16 @@ target = "teaching"
 href = "/teaching"
 
 [[navigation]]
+title = "Projects"
+type = "page"
+target = "services"
+href = "/services"
+
+[[navigation]]
 title = "Awards"
 type = "page"
 target = "awards"
 href = "/awards"
-
-[[navigation]]
-title = "Services"
-type = "page"
-target = "services"
-href = "/services"
 
 [[navigation]]
 title = "CV"

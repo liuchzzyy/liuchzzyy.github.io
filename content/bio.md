@@ -1,5 +1,5 @@
-I am a PhD student at the School of Science, University of Example, advised by [Prof. Advisor One](https://example.com) and [Dr. Advisor Two](https://example.com).
+I am a Ph.D. candidate in Materials Science at the Institute of Materials Science of Barcelona (ICMAB-CSIC) and the Universitat Autònoma de Barcelona. My research focuses on aqueous Zn–MnO₂ batteries, solid-state electrolytes, Mn-based cathodes, and operando characterization.
 
-Prior to this, I obtained a BSc degree with First Class Honours in Natural Science from the University of Example.
+My doctoral work investigates the reaction mechanisms and capacity limitations of MnO₂ in rechargeable zinc chemistry using operando synchrotron techniques. Previously, I developed liquid-alloy interlayers to suppress dendrite growth on zinc and sodium metal anodes.
 
-My current research focuses on investigating the mathematical principles of natural philosophy.
+I also use spectral decomposition and reproducible Python workflows for data processing, figure generation, and materials-analysis evidence organization.
