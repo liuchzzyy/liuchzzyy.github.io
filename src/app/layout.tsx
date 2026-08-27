@@ -8,17 +8,22 @@ import { getConfig } from '@/lib/config';
 import { getRuntimeI18nConfig } from '@/lib/i18n/config';
 import type { SiteConfig } from '@/lib/config';
 
+function stripMarkup(value: string): string {
+  return value.replace(/<[^>]*>/g, '');
+}
+
 export async function generateMetadata(): Promise<Metadata> {
   const config = getConfig();
   const runtimeI18n = getRuntimeI18nConfig(config.i18n);
   const openGraphLocale = runtimeI18n.defaultLocale === 'zh' ? 'zh_CN' : 'en_US';
+  const plainDescription = stripMarkup(config.site.description);
 
   return {
     title: {
       default: config.site.title,
       template: `%s | ${config.site.title}`,
     },
-    description: config.site.description,
+    description: plainDescription,
     keywords: [config.author.name, 'PhD', 'Research', config.author.institution],
     authors: [{ name: config.author.name }],
     creator: config.author.name,
@@ -30,7 +35,7 @@ export async function generateMetadata(): Promise<Metadata> {
       type: 'website',
       locale: openGraphLocale,
       title: config.site.title,
-      description: config.site.description,
+      description: plainDescription,
       siteName: `${config.author.name}'s Academic Website`,
     },
     alternates: {

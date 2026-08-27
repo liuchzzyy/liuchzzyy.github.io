@@ -6,7 +6,7 @@ description = "我获得的荣誉与奖项。"
 title = "最佳海报奖"
 subtitle = "第 74 届国际电化学学会（ISE）年会"
 date = "2023-09"
-content = "获奖报告题目为 \"Operando Bidimensional EXAFS Study on Aqueous Zn-MnO2 Batteries\"。"
+content = "获奖报告题目为 \"Operando Bidimensional EXAFS Study on Aqueous Zn-MnO<sub>2</sub> Batteries\"。"
 
 [[items]]
 title = "CSIC iMOVE 项目资助"
@@ -19,27 +19,3 @@ title = "中国政府奖学金"
 subtitle = "国家留学基金管理委员会"
 date = "2021–2025"
 content = "博士阶段奖学金，编号 202106370079。"
-
-[[items]]
-title = "示例奖项"
-subtitle = "颁发机构"
-date = "2025"
-content = "奖项说明。"
-
-[[items]]
-title = "示例奖项"
-subtitle = "颁发机构"
-date = "2024"
-content = "奖项说明。"
-
-[[items]]
-title = "示例奖项"
-subtitle = "颁发机构"
-date = "2023"
-content = "奖项说明。"
-
-[[items]]
-title = "示例奖项"
-subtitle = "颁发机构"
-date = "2022"
-content = "奖项说明。"

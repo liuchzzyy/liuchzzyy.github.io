@@ -3,6 +3,9 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
+import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
+import rehypeSanitize from 'rehype-sanitize';
 import {
     EnvelopeIcon,
     AcademicCapIcon,
@@ -309,7 +312,14 @@ export default function Profile({ author, social, features, researchInterests }:
                     <h3 className="font-semibold text-primary mb-3">{messages.profile.researchInterests}</h3>
                     <div className="space-y-2 text-sm text-neutral-700 dark:text-neutral-500">
                         {researchInterests.map((interest, index) => (
-                            <div key={index}>{interest}</div>
+                            <div key={index}>
+                                <ReactMarkdown
+                                    components={{ p: ({ children }) => <>{children}</> }}
+                                    rehypePlugins={[rehypeRaw, rehypeSanitize]}
+                                >
+                                    {interest}
+                                </ReactMarkdown>
+                            </div>
                         ))}
                     </div>
                 </div>

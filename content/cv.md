@@ -18,7 +18,7 @@ Email: [liuchzzyy@gmail.com](mailto:liuchzzyy@gmail.com) · ORCID: [0000-0001-89
 
 ### Research & Technical Expertise
 
-- Zn–MnO₂ batteries: reaction mechanisms and materials-modification strategies.
+- Zn–MnO<sub>2</sub> batteries: reaction mechanisms and materials-modification strategies.
 - Operando/in situ characterization, including EQCM and synchrotron-based XAS.
 - Data analysis with PCA, MCR-ALS, clustering, and Python.
 - Reproducible Python workflows for data processing, figure generation, and manuscript-scale evidence organization.
@@ -31,6 +31,6 @@ Email: [liuchzzyy@gmail.com](mailto:liuchzzyy@gmail.com) · ORCID: [0000-0001-89
 
 ### Fellowships & Awards
 
-- **Best Poster Prize**, 74th Annual Meeting of the International Society of Electrochemistry (*2023.09*), for *Operando Bidimensional EXAFS Study on Aqueous Zn-MnO₂ Batteries*.
+- **Best Poster Prize**, 74th Annual Meeting of the International Society of Electrochemistry (*2023.09*), for *Operando Bidimensional EXAFS Study on Aqueous Zn–MnO<sub>2</sub> Batteries*.
 - **CSIC iMOVE Project Funding**, IMOVE23074 (*2023–2024*).
 - **Chinese Government Scholarship**, China Scholarship Council, No. 202106370079 (*2021–2025*).

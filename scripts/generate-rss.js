@@ -75,6 +75,40 @@ function toNewsDate(value) {
   return date;
 }
 
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function formatInlineMarkup(value) {
+  const normalized = String(value)
+    .replace(/<sub>(.*?)<\/sub>/gi, '\\textsubscript{$1}')
+    .replace(/<sup>(.*?)<\/sup>/gi, '\\textsuperscript{$1}');
+
+  return normalized
+    .split(/(\\text(?:sub|super)script\{[^{}]*\})/g)
+    .map((part) => {
+      const match = /^\\text(sub|super)script\{([^{}]*)\}$/.exec(part);
+      if (match) {
+        const tagName = match[1] === 'sub' ? 'sub' : 'sup';
+        return `<${tagName}>${escapeHtml(match[2])}</${tagName}>`;
+      }
+
+      return escapeHtml(part)
+        .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*([^*]+)\*/g, '<em>$1</em>');
+    })
+    .join('');
+}
+
+function toPlainText(value) {
+  return formatInlineMarkup(value).replace(/<[^>]*>/g, '');
+}
+
 function buildFeed(config, items) {
   const feed = new Feed({
     title: config.site.title,
@@ -101,15 +135,16 @@ function buildFeed(config, items) {
     if (item.type === 'publication') {
       const description = [
         '<p><strong>Type:</strong> Publication</p>',
-        `<p><strong>Authors:</strong> ${item.data.author || 'Unknown'}</p>`,
-        item.data.abstract ? `<p>${item.data.abstract}</p>` : '',
-        item.data.journal ? `<p><strong>Journal:</strong> ${item.data.journal}</p>` : '',
-        item.data.booktitle ? `<p><strong>Conference:</strong> ${item.data.booktitle}</p>` : '',
-        item.data.doi ? `<p><strong>DOI:</strong> <a href="https://doi.org/${item.data.doi}">${item.data.doi}</a></p>` : '',
+        `<p><strong>Title:</strong> ${formatInlineMarkup(item.data.title || 'Untitled')}</p>`,
+        `<p><strong>Authors:</strong> ${formatInlineMarkup(item.data.author || 'Unknown')}</p>`,
+        item.data.abstract ? `<p>${formatInlineMarkup(item.data.abstract)}</p>` : '',
+        item.data.journal ? `<p><strong>Journal:</strong> ${formatInlineMarkup(item.data.journal)}</p>` : '',
+        item.data.booktitle ? `<p><strong>Conference:</strong> ${formatInlineMarkup(item.data.booktitle)}</p>` : '',
+        item.data.doi ? `<p><strong>DOI:</strong> <a href="https://doi.org/${encodeURIComponent(item.data.doi)}">${escapeHtml(item.data.doi)}</a></p>` : '',
       ].join('');
 
       feed.addItem({
-        title: `[Publication] ${item.data.title || 'Untitled'}`,
+        title: `[Publication] ${toPlainText(item.data.title || 'Untitled')}`,
         id: item.data.id,
         link: `${SITE_URL}/publications/#${item.data.id}`,
         description,
@@ -121,9 +156,11 @@ function buildFeed(config, items) {
       return;
     }
 
-    const description = `<p><strong>Type:</strong> News</p><p>${item.data.content}</p>`;
+    const content = formatInlineMarkup(item.data.content);
+    const title = toPlainText(item.data.content);
+    const description = `<p><strong>Type:</strong> News</p><p>${content}</p>`;
     feed.addItem({
-      title: `[News] ${item.data.content.substring(0, 100)}${item.data.content.length > 100 ? '...' : ''}`,
+      title: `[News] ${title.substring(0, 100)}${title.length > 100 ? '...' : ''}`,
       id: `news-${index}`,
       link: `${SITE_URL}/`,
       description,

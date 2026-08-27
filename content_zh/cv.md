@@ -18,7 +18,7 @@
 
 ### 研究与技术专长
 
-- 水系 Zn–MnO₂ 电池的反应机制与材料改性策略。
+- 水系 Zn–MnO<sub>2</sub> 电池的反应机制与材料改性策略。
 - 原位/在线表征，包括 EQCM 与同步辐射 XAS。
 - PCA、MCR-ALS、聚类及 Python 数据分析。
 - 使用可复现的 Python 工作流进行数据处理、图件生成和论文证据组织。
@@ -31,6 +31,6 @@
 
 ### 奖励与资助
 
-- **最佳海报奖**，第 74 届国际电化学学会（ISE）年会（*2023.09*）；报告题目为 *Operando Bidimensional EXAFS Study on Aqueous Zn-MnO₂ Batteries*。
+- **最佳海报奖**，第 74 届国际电化学学会（ISE）年会（*2023.09*）；报告题目为 *Operando Bidimensional EXAFS Study on Aqueous Zn–MnO<sub>2</sub> Batteries*。
 - **CSIC iMOVE 项目资助**，IMOVE23074（*2023–2024*）。
 - **中国政府奖学金**，国家留学基金管理委员会，编号 202106370079（*2021–2025*）。

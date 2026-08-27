@@ -2,6 +2,7 @@
 
 import { useLocaleStore } from '@/lib/stores/localeStore';
 import { useMessages } from '@/lib/i18n/useMessages';
+import { Rss } from 'lucide-react';
 
 interface FooterProps {
   lastUpdated?: string;
@@ -27,6 +28,15 @@ export default function Footer({ lastUpdated, lastUpdatedByLocale, defaultLocale
             {messages.footer.lastUpdated}: {resolvedLastUpdated}
           </p>
           <p className="text-xs text-neutral-500 flex items-center">
+            <a
+              href="/rss/feed.xml"
+              className="mr-3 inline-flex items-center gap-1 hover:text-neutral-700 dark:hover:text-neutral-300"
+              title="RSS Feed"
+              aria-label="RSS Feed"
+            >
+              <Rss className="h-3.5 w-3.5" aria-hidden="true" />
+              RSS
+            </a>
             <a href="https://github.com/liuchzzyy/PRISM" target="_blank" rel="noopener noreferrer">
               {messages.footer.builtWithPrism}
             </a>

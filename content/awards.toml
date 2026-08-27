@@ -6,7 +6,7 @@ description = "Honors and awards I have received."
 title = "Best Poster Prize"
 subtitle = "74th Annual Meeting of the International Society of Electrochemistry"
 date = "2023-09"
-content = "Awarded for \"Operando Bidimensional EXAFS Study on Aqueous Zn-MnO2 Batteries\"."
+content = "Awarded for \"Operando Bidimensional EXAFS Study on Aqueous Zn-MnO<sub>2</sub> Batteries\"."
 
 [[items]]
 title = "CSIC iMOVE Project Funding"
@@ -19,27 +19,3 @@ title = "Chinese Government Scholarship"
 subtitle = "China Scholarship Council"
 date = "2021–2025"
 content = "Ph.D. scholarship, award number 202106370079."
-
-[[items]]
-title = "Example Award"
-subtitle = "Organization"
-date = "2025"
-content = "Description of the award."
-
-[[items]]
-title = "Example Award"
-subtitle = "Organization"
-date = "2024"
-content = "Description of the award."
-
-[[items]]
-title = "Example Award"
-subtitle = "Organization"
-date = "2023"
-content = "Description of the award."
-
-[[items]]
-title = "Example Award"
-subtitle = "Organization"
-date = "2022"
-content = "Description of the award."
