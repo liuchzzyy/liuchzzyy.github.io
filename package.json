@@ -10,7 +10,7 @@
   },
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "next build && node scripts/generate-rss.js",
     "start": "next start",
     "lint": "next lint"
   },
@@ -19,6 +19,7 @@
     "@heroicons/react": "^2.2.0",
     "bibtex-parse-js": "^0.0.24",
     "clsx": "^2.1.1",
+    "feed": "^5.1.0",
     "framer-motion": "^12.18.1",
     "lucide-react": "^0.515.0",
     "next": "15.3.3",
