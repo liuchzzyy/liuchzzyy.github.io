@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import rehypeSanitize from 'rehype-sanitize';
@@ -14,11 +15,13 @@ export interface NewsItem {
 interface NewsProps {
     items: NewsItem[];
     title?: string;
+    enableOnePageMode?: boolean;
 }
 
-export default function News({ items, title }: NewsProps) {
+export default function News({ items, title, enableOnePageMode = false }: NewsProps) {
     const messages = useMessages();
     const resolvedTitle = title || messages.home.news;
+    const viewAllHref = enableOnePageMode ? '/#news' : '/news';
 
     return (
         <motion.section
@@ -26,7 +29,16 @@ export default function News({ items, title }: NewsProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
         >
-            <h2 className="text-2xl font-serif font-bold text-primary mb-4">{resolvedTitle}</h2>
+            <div className="flex items-center justify-between mb-4">
+                <h2 className="text-2xl font-serif font-bold text-primary">{resolvedTitle}</h2>
+                <Link
+                    href={viewAllHref}
+                    prefetch={true}
+                    className="text-accent hover:text-accent-dark text-sm font-medium transition-all duration-200 rounded hover:bg-accent/10 hover:shadow-sm"
+                >
+                    {messages.home.viewAll} →
+                </Link>
+            </div>
             <div className="space-y-3">
                 {items.map((item, index) => (
                     <div key={index} className="flex items-start space-x-3">

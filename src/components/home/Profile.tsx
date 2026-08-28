@@ -157,7 +157,9 @@ export default function Profile({ author, social, features, researchInterests }:
                     {author.title}
                 </p>
                 <p className="text-neutral-600 mb-2">
-                    {author.institution}
+                    {author.institution.split(/\r?\n/).map((line, index) => (
+                        <span key={`${line}-${index}`} className="block">{line}</span>
+                    ))}
                 </p>
             </div>
 

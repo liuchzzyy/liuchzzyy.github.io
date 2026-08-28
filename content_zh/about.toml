@@ -6,9 +6,9 @@ research_interests = [
   "水系 Zn–MnO<sub>2</sub> 电池",
   "固态电解质",
   "Mn 基正极材料",
-  "原位同步辐射表征",
+  "原位表征技术分析",
   "谱学分解",
-  "数据驱动材料分析"
+  "数据驱动框架分析"
 ]
 
 [[sections]]
@@ -29,3 +29,4 @@ id = "news"
 type = "list"
 title = "最新动态"
 source = "news.toml"
+limit = 3

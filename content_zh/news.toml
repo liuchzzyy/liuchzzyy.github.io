@@ -1,5 +1,9 @@
+type = "list"
+title = "新闻动态"
+description = "研究动态与公告。"
+
 [[news]]
-date = "2025"
+date = "2025-07"
 content = "以第一作者在 *Energy & Environmental Science* 发表 \"Unveiling Capacity Limitations of MnO<sub>2</sub> in Rechargeable Zn Chemistry\"。"
 
 [[news]]

@@ -1,5 +1,9 @@
+type = "list"
+title = "News"
+description = "Research updates and announcements."
+
 [[news]]
-date = "2025"
+date = "2025-07"
 content = "Published \"Unveiling Capacity Limitations of MnO<sub>2</sub> in Rechargeable Zn Chemistry\" in *Energy & Environmental Science*."
 
 [[news]]

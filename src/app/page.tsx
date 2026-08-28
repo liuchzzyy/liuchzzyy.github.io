@@ -3,7 +3,7 @@ import { getMarkdownContent, getBibtexContent, getTomlContent, getPageConfig } f
 import { parseBibTeX } from '@/lib/bibtexParser';
 import HomePageClient, { type HomePageLocaleData } from '@/components/home/HomePageClient';
 import { Publication } from '@/types/publication';
-import { BasePageConfig, PublicationPageConfig, TextPageConfig, CardPageConfig } from '@/types/page';
+import { BasePageConfig, PublicationPageConfig, TextPageConfig, CardPageConfig, ListPageConfig } from '@/types/page';
 import { getRuntimeI18nConfig } from '@/lib/i18n/config';
 
 interface SectionConfig {
@@ -27,7 +27,8 @@ type PageData =
   | { type: 'about'; id: string; sections: SectionConfig[] }
   | { type: 'publication'; id: string; config: PublicationPageConfig; publications: Publication[] }
   | { type: 'text'; id: string; config: TextPageConfig; content: string }
-  | { type: 'card'; id: string; config: CardPageConfig };
+  | { type: 'card'; id: string; config: CardPageConfig }
+  | { type: 'list'; id: string; config: ListPageConfig };
 
 function processSections(sections: SectionConfig[], locale?: string): SectionConfig[] {
   return sections.map((section: SectionConfig) => {
@@ -50,9 +51,10 @@ function processSections(sections: SectionConfig[], locale?: string): SectionCon
       }
       case 'list': {
         const newsData = section.source ? getTomlContent<{ news: NewsItem[] }>(section.source, locale) : null;
+        const newsItems = (newsData?.news || []).slice().sort((left, right) => right.date.localeCompare(left.date));
         return {
           ...section,
-          items: newsData?.news || [],
+          items: section.limit ? newsItems.slice(0, section.limit) : newsItems,
         };
       }
       default:
@@ -113,6 +115,19 @@ function loadPageDataForLocale(locale: string | undefined): HomePageLocaleData {
             type: 'card',
             id: item.target,
             config: pageConfig as CardPageConfig,
+          } as PageData;
+        }
+
+        if (pageConfig.type === 'list') {
+          const listConfig = pageConfig as ListPageConfig;
+          const newsData = getTomlContent<{ news: NewsItem[] }>('news.toml', locale);
+          return {
+            type: 'list',
+            id: item.target,
+            config: {
+              ...listConfig,
+              items: newsData?.news || [],
+            },
           } as PageData;
         }
 

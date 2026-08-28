@@ -7,7 +7,7 @@ last_updated = "August 27, 2026"
 [author]
 name = "Dr. Cheng Liu"
 title = "Ph.D. Candidate in Materials Science"
-institution = "ICMAB-CSIC & Universitat Autònoma de Barcelona"
+institution = "Institute of Materials Science of Barcelona (ICMAB-CSIC)\nUniversitat Autònoma de Barcelona"
 avatar = "/bio.jpg"
 
 [social]
@@ -70,6 +70,12 @@ title = "Projects"
 type = "page"
 target = "services"
 href = "/services"
+
+[[navigation]]
+title = "News"
+type = "page"
+target = "news"
+href = "/news"
 
 [[navigation]]
 title = "Awards"

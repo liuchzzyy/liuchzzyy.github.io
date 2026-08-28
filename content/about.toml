@@ -6,9 +6,9 @@ research_interests = [
   "Aqueous Zn–MnO<sub>2</sub> batteries",
   "Solid-state electrolytes",
   "Mn-based cathodes",
-  "Operando synchrotron characterization",
+  "Operando characterization analysis",
   "Spectral decomposition",
-  "Data-driven materials analysis"
+  "Data-driven framework analysis"
 ]
 
 [[sections]]
@@ -29,4 +29,5 @@ id = "news"
 type = "list"
 title = "News"
 source = "news.toml"
+limit = 3
 

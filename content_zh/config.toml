@@ -6,7 +6,7 @@ last_updated = "2026年8月27日"
 [author]
 name = "刘城"
 title = "材料科学博士研究生"
-institution = "巴塞罗那材料科学研究所（ICMAB-CSIC）/ 巴塞罗那自治大学"
+institution = "巴塞罗那材料科学研究所（ICMAB-CSIC）\n巴塞罗那自治大学"
 
 [social]
 email = "liuchzzyy@163.com"
@@ -44,6 +44,12 @@ title = "科研项目"
 type = "page"
 target = "services"
 href = "/services"
+
+[[navigation]]
+title = "新闻"
+type = "page"
+target = "news"
+href = "/news"
 
 [[navigation]]
 title = "奖项"

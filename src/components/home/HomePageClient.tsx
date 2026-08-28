@@ -3,13 +3,14 @@
 import Profile from '@/components/home/Profile';
 import About from '@/components/home/About';
 import SelectedPublications from '@/components/home/SelectedPublications';
-import News, { NewsItem } from '@/components/home/News';
+import News, { type NewsItem } from '@/components/home/News';
 import PublicationsList from '@/components/publications/PublicationsList';
 import TextPage from '@/components/pages/TextPage';
 import CardPage from '@/components/pages/CardPage';
+import ListPage from '@/components/pages/ListPage';
 import type { SiteConfig } from '@/lib/config';
 import { Publication } from '@/types/publication';
-import { CardPageConfig, PublicationPageConfig, TextPageConfig } from '@/types/page';
+import { CardPageConfig, ListPageConfig, PublicationPageConfig, TextPageConfig } from '@/types/page';
 import { useLocaleStore } from '@/lib/stores/localeStore';
 
 interface SectionConfig {
@@ -28,7 +29,8 @@ type PageData =
   | { type: 'about'; id: string; sections: SectionConfig[] }
   | { type: 'publication'; id: string; config: PublicationPageConfig; publications: Publication[] }
   | { type: 'text'; id: string; config: TextPageConfig; content: string }
-  | { type: 'card'; id: string; config: CardPageConfig };
+  | { type: 'card'; id: string; config: CardPageConfig }
+  | { type: 'list'; id: string; config: ListPageConfig };
 
 export interface HomePageLocaleData {
   author: SiteConfig['author'];
@@ -93,6 +95,7 @@ export default function HomePageClient({ dataByLocale, defaultLocale }: HomePage
                         key={section.id}
                         items={section.items || []}
                         title={section.title}
+                        enableOnePageMode={data.enableOnePageMode}
                       />
                     );
                   default:
@@ -115,6 +118,12 @@ export default function HomePageClient({ dataByLocale, defaultLocale }: HomePage
               )}
               {page.type === 'card' && (
                 <CardPage
+                  config={page.config}
+                  embedded={true}
+                />
+              )}
+              {page.type === 'list' && (
+                <ListPage
                   config={page.config}
                   embedded={true}
                 />
