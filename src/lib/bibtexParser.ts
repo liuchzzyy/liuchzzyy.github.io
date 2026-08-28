@@ -1,4 +1,4 @@
-import { Publication, PublicationType, ResearchArea } from '@/types/publication';
+import { Author, Publication, PublicationType, ResearchArea } from '@/types/publication';
 import { getConfig } from './config';
 import { getRuntimeI18nConfig } from './i18n/config';
 import { parseBibTeXInline } from './bibtexInline';
@@ -44,7 +44,7 @@ export function parseBibTeX(bibtexContent: string, locale?: string): Publication
     const tags = entry.entryTags;
 
     // Parse authors
-    const authors = parseAuthors(tags.author || '', highlightNames);
+    const authors = parseAuthors(tags.author || '', highlightNames, tags.author_orcids);
 
     // Parse year and month
     const year = parseInt(tags.year) || new Date().getFullYear();
@@ -93,7 +93,7 @@ export function parseBibTeX(bibtexContent: string, locale?: string): Publication
       preview,
 
       // Store original BibTeX (excluding custom fields)
-      bibtex: reconstructBibTeX(entry, ['selected', 'preview', 'description', 'keywords', 'code']),
+      bibtex: reconstructBibTeX(entry, ['selected', 'preview', 'description', 'keywords', 'code', 'author_orcids']),
     };
 
     // Clean up undefined fields
@@ -177,11 +177,12 @@ function buildNameVariants(name: string): Set<string> {
   return variants;
 }
 
-function parseAuthors(authorsStr: string, highlightNames: string[]): Array<{ name: string; isHighlighted?: boolean; isCorresponding?: boolean; isCoAuthor?: boolean }> {
+function parseAuthors(authorsStr: string, highlightNames: string[], authorOrcids?: string): Author[] {
   if (!authorsStr) return [];
 
   const highlightTextCandidates = new Set<string>();
   const highlightNormalizedCandidates = new Set<string>();
+  const orcidByName = parseAuthorOrcids(authorOrcids);
 
   highlightNames.forEach((name) => {
     const variants = buildNameVariants(name);
@@ -227,12 +228,39 @@ function parseAuthors(authorsStr: string, highlightNames: string[]): Array<{ nam
 
       return {
         name,
+        orcid: orcidByName.get(normalizedName),
         isHighlighted,
         isCorresponding,
         isCoAuthor,
       };
     })
     .filter(author => author.name);
+}
+
+function parseAuthorOrcids(value?: string): Map<string, string> {
+  const orcidByName = new Map<string, string>();
+
+  if (!value) return orcidByName;
+
+  value.split(';').forEach((mapping) => {
+    const separatorIndex = mapping.indexOf('|');
+    if (separatorIndex < 0) return;
+
+    const rawName = cleanBibTeXString(mapping.slice(0, separatorIndex)).trim();
+    const orcid = normalizeOrcid(mapping.slice(separatorIndex + 1));
+    if (!rawName || !orcid) return;
+
+    buildNameVariants(rawName).forEach((variant) => {
+      orcidByName.set(normalizePersonNameForMatch(variant), orcid);
+    });
+  });
+
+  return orcidByName;
+}
+
+function normalizeOrcid(value: string): string | undefined {
+  const match = value.trim().match(/^(?:https?:\/\/(?:www\.)?orcid\.org\/)?(\d{4}-\d{4}-\d{4}-[\dX]{4})$/i);
+  return match ? `https://orcid.org/${match[1].toUpperCase()}` : undefined;
 }
 
 function cleanBibTeXString(str?: string): string {
