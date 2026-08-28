@@ -1,10 +1,10 @@
 [site]
-title = "刘城博士"
+title = "刘城"
 description = "专注于水系 Zn–MnO<sub>2</sub> 电池与原位表征技术的材料科学研究者。"
 last_updated = "2026年8月27日"
 
 [author]
-name = "刘城博士"
+name = "刘城"
 title = "材料科学博士研究生"
 institution = "巴塞罗那材料科学研究所（ICMAB-CSIC）/ 巴塞罗那自治大学"
 
@@ -18,6 +18,7 @@ location_details = [
 ]
 orcid = "https://orcid.org/0000-0001-8967-1174"
 github = "https://github.com/liuchzzyy"
+xiaohongshu = "https://www.xiaohongshu.com/user/profile/67154fd1000000001d02113d"
 google_scholar = "https://scholar.google.com/citations?user=E7pDru4AAAAJ&hl=en"
 
 [[navigation]]

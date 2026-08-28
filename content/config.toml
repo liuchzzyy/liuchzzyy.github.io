@@ -22,7 +22,7 @@ location_details = [
 google_scholar = "https://scholar.google.com/citations?user=E7pDru4AAAAJ&hl=en"
 orcid = "https://orcid.org/0000-0001-8967-1174"
 github = "https://github.com/liuchzzyy"
-linkedin = "https://linkedin.com"
+xiaohongshu = "https://www.xiaohongshu.com/user/profile/67154fd1000000001d02113d"
 
 [features]
 # Show a like button on the about page
