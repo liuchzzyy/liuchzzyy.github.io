@@ -164,7 +164,12 @@ function buildNameVariants(name: string): Set<string> {
 
   variants.add(cleaned);
 
-  const parts = cleaned.split(/\s+/).filter(Boolean);
+  const withoutHonorific = cleaned.replace(/^(?:dr|prof|professor)\.?\s+/i, '');
+  if (withoutHonorific !== cleaned) {
+    variants.add(withoutHonorific);
+  }
+
+  const parts = withoutHonorific.split(/\s+/).filter(Boolean);
   if (parts.length === 2) {
     variants.add(`${parts[1]} ${parts[0]}`);
   }
@@ -200,10 +205,10 @@ function parseAuthors(authorsStr: string, highlightNames: string[]): Array<{ nam
       const isCorresponding = name.includes('*');
 
       // Check for co-author marker (#)
-      const isCoAuthor = name.includes('#');
+      const isCoAuthor = /[#‡]/.test(name);
 
       // Remove special markers from name
-      name = name.replace(/[*#]/g, '');
+      name = name.replace(/[*#‡]/g, '');
 
       // Handle "Last, First" format
       if (name.includes(',')) {

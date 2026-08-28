@@ -3,30 +3,6 @@ title = "科研项目"
 description = "部分科研项目与合作经历。"
 
 [[items]]
-title = "Zn-Mn 电池的原位 XAS 分析"
-subtitle = "面向真实循环过程的电池化学"
-content = "用于整理原位 XAS 谱图、电化学曲线、样品标签和派生指标的工作流，便于比较不同循环条件下的反应阶段变化。"
-tags = ["原位 XAS", "Zn-Mn 电池", "电化学", "Python"]
-
-[[items]]
-title = "谱学分解与物相追踪"
-subtitle = "PCA、EFA、SIMPLISMA 与 MCR-ALS 流程"
-content = "用于测试能量窗口、固定或自由参考谱策略、浓度初值和重构结果检查的可复用工作流，服务于谱学数据解析。"
-tags = ["MCR-ALS", "PCA", "EFA", "SIMPLISMA"]
-
-[[items]]
-title = "面向论文图的可复现绘图流程"
-subtitle = "从 notebook 到正式图件"
-content = "用于生成电化学-谱学对齐图、多面板论文图以及可追踪导出文件的 notebook 与脚本模式，服务主文和补充信息写作。"
-tags = ["可视化", "Jupyter", "Matplotlib", "可复现"]
-
-[[items]]
-title = "研究自动化与文献流程"
-subtitle = "服务论文、笔记与引用的本地工具"
-content = "围绕文献监测、Zotero 引用检查、Markdown 笔记和项目自动化整理的本地工具集合。"
-tags = ["Zotero", "自动化", "研究笔记", "CLI"]
-
-[[items]]
 title = "先进碳硫复合材料的构建"
 subtitle = "CSIC iMOVE 项目 IMOVE23074"
 date = "2023-10 – 2023-12"
@@ -49,6 +25,6 @@ tags = ["液流电池", "储能"]
 
 [[items]]
 title = "审稿人"
-subtitle = "某期刊"
-date = "2024"
-content = "参与审阅论文。"
+subtitle = "Chemical Engineering Journal"
+date = "2026"
+content = "根据 ORCID 公开记录，为 Chemical Engineering Journal 完成论文审稿。"

@@ -3,30 +3,6 @@ title = "Research Projects"
 description = "Selected research projects and collaborations."
 
 [[items]]
-title = "Operando XAS Analysis for Zn-Mn Batteries"
-subtitle = "Battery chemistry under realistic cycling"
-content = "Workflow for organizing operando XAS spectra, electrochemical traces, sample labels, and derived indicators so that reaction-stage changes can be compared across cycling conditions."
-tags = ["Operando XAS", "Zn-Mn batteries", "Electrochemistry", "Python"]
-
-[[items]]
-title = "Spectral Decomposition and Phase Tracking"
-subtitle = "PCA, EFA, SIMPLISMA, and MCR-ALS workflows"
-content = "Reusable workflows for testing spectral windows, fixed or free reference strategies, concentration initializers, and reconstruction checks in spectroscopy datasets."
-tags = ["MCR-ALS", "PCA", "EFA", "SIMPLISMA"]
-
-[[items]]
-title = "Manuscript-Ready Figure Pipeline"
-subtitle = "From notebooks to reproducible figures"
-content = "Notebook and script patterns for generating aligned electrochemistry-spectroscopy panels, publication figures, and traceable exports for manuscripts and supporting information."
-tags = ["Visualization", "Jupyter", "Matplotlib", "Reproducibility"]
-
-[[items]]
-title = "Research Automation and Literature Workflow"
-subtitle = "Local tools for papers, notes, and references"
-content = "Utilities for local literature monitoring, Zotero-backed citation checks, Markdown notes, and project-specific automation around research writing."
-tags = ["Zotero", "Automation", "Research notes", "CLI"]
-
-[[items]]
 title = "Elaboration of State-of-the-Art Carbon-Sulfur Composites"
 subtitle = "CSIC iMOVE Project IMOVE23074"
 date = "2023-10 – 2023-12"
@@ -49,6 +25,6 @@ tags = ["Flow batteries", "Energy storage"]
 
 [[items]]
 title = "Reviewer"
-subtitle = "Journal Name"
-date = "2024"
-content = "Reviewed papers for..."
+subtitle = "Chemical Engineering Journal"
+date = "2026"
+content = "Completed a peer review for Chemical Engineering Journal."

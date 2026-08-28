@@ -3,8 +3,25 @@ title = "Teaching"
 description = "Courses I have taught or assisted with."
 
 [[items]]
-title = "Example Course"
-subtitle = "Teaching Assistant"
-date = "2024"
-content = "Description of the course and responsibilities. Content of this course can be found [here](https://example.com)."
-tags = ["Undergraduate", "CS"]
+title = "Operando XAS Analysis for Zn-Mn Batteries"
+subtitle = "Battery chemistry under realistic cycling"
+content = "Workflow for organizing operando XAS spectra, electrochemical traces, sample labels, and derived indicators so that reaction-stage changes can be compared across cycling conditions."
+tags = ["Operando XAS", "Zn-Mn batteries", "Electrochemistry", "Python"]
+
+[[items]]
+title = "Spectral Decomposition and Phase Tracking"
+subtitle = "PCA, EFA, SIMPLISMA, and MCR-ALS workflows"
+content = "Reusable workflows for testing spectral windows, fixed or free reference strategies, concentration initializers, and reconstruction checks in spectroscopy datasets."
+tags = ["MCR-ALS", "PCA", "EFA", "SIMPLISMA"]
+
+[[items]]
+title = "Manuscript-Ready Figure Pipeline"
+subtitle = "From notebooks to reproducible figures"
+content = "Notebook and script patterns for generating aligned electrochemistry-spectroscopy panels, publication figures, and traceable exports for manuscripts and supporting information."
+tags = ["Visualization", "Jupyter", "Matplotlib", "Reproducibility"]
+
+[[items]]
+title = "Research Automation and Literature Workflow"
+subtitle = "Local tools for papers, notes, and references"
+content = "Utilities for local literature monitoring, Zotero-backed citation checks, Markdown notes, and project-specific automation around research writing."
+tags = ["Zotero", "Automation", "Research notes", "CLI"]
