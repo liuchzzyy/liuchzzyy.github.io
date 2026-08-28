@@ -18,14 +18,14 @@ Email: [liuchzzyy@gmail.com](mailto:liuchzzyy@gmail.com) · ORCID: [0000-0001-89
 
 ### Research & Technical Expertise
 
-- Zn–MnO<sub>2</sub> batteries: reaction mechanisms and materials-modification strategies.
+- Aqueous Zn–MnO<sub>2</sub> batteries: reaction mechanisms and materials-modification strategies.
 - Operando/in situ characterization, including EQCM and synchrotron-based XAS.
 - Data analysis with PCA, MCR-ALS, clustering, and Python.
 - Reproducible Python workflows for data processing, figure generation, and manuscript-scale evidence organization.
 
 ### Selected Research Projects
 
-- **Elaboration of State-of-the-Art Carbon-Sulfur Composites** — CSIC iMOVE Project IMOVE23074, University of Rome La Sapienza (*2023.10–2023.12*).
+- **Development of Advanced Carbon-Sulfur Composites** — CSIC iMOVE Project IMOVE23074, Sapienza University of Rome (*2023.10–2023.12*).
 - **Local Chemistry for Sustainable and Rechargeable Zn-Metal Batteries** — AEI SuReZiB Project PID2021124681OB-I00 (*2022.09–2025.08*).
 - **Green Chemistry for a Membrane-Free Electrolytic Flow Battery** — AEI GreenFloBat Project TED2021-132707B-I00 (*2022.12–2024.11*).
 

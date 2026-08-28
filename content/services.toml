@@ -3,17 +3,17 @@ title = "Research Projects"
 description = "Selected research projects and collaborations."
 
 [[items]]
-title = "Elaboration of State-of-the-Art Carbon-Sulfur Composites"
+title = "Development of Advanced Carbon-Sulfur Composites"
 subtitle = "CSIC iMOVE Project IMOVE23074"
 date = "2023-10 – 2023-12"
-content = "Led a short-term project at the University of Rome La Sapienza on carbon-sulfur composites, operando Raman characterization, and PCA/MCR-ALS data analysis."
+content = "Led a short-term project at Sapienza University of Rome on carbon-sulfur composites, operando Raman characterization of aqueous zinc batteries, and PCA/MCR-ALS data analysis."
 tags = ["Aqueous zinc batteries", "Operando Raman", "Data analysis"]
 
 [[items]]
 title = "Local Chemistry for Sustainable and Rechargeable Zn-Metal Batteries"
 subtitle = "AEI SuReZiB Project PID2021124681OB-I00"
 date = "2022-09 – 2025-08"
-content = "Participated in operando experiments, data analysis, and project reporting for sustainable zinc-metal batteries."
+content = "Participated in operando characterization, data analysis, and final project reporting for sustainable zinc-metal batteries."
 tags = ["Zn-metal batteries", "Operando characterization"]
 
 [[items]]
@@ -27,4 +27,4 @@ tags = ["Flow batteries", "Energy storage"]
 title = "Reviewer"
 subtitle = "Chemical Engineering Journal"
 date = "2026"
-content = "Completed a peer review for Chemical Engineering Journal."
+content = "According to the public ORCID record, completed a peer review for Chemical Engineering Journal."
