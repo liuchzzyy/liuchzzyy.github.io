@@ -4,21 +4,21 @@ description = "Selected research projects and collaborations."
 
 [[items]]
 title = "Development of Advanced Carbon-Sulfur Composites"
-subtitle = "CSIC iMOVE Project IMOVE23074"
+subtitle = "CSIC iMOVE Project IMOVE*****"
 date = "2023-10 – 2023-12"
 content = "Led a short-term project at Sapienza University of Rome on carbon-sulfur composites, operando Raman characterization of aqueous zinc batteries, and PCA/MCR-ALS data analysis."
 tags = ["Aqueous zinc batteries", "Operando Raman", "Data analysis"]
 
 [[items]]
 title = "Local Chemistry for Sustainable and Rechargeable Zn-Metal Batteries"
-subtitle = "AEI SuReZiB Project PID2021124681OB-I00"
+subtitle = "AEI SuReZiB Project PID2021******B-I00"
 date = "2022-09 – 2025-08"
 content = "Participated in operando characterization, data analysis, and final project reporting for sustainable zinc-metal batteries."
 tags = ["Zn-metal batteries", "Operando characterization"]
 
 [[items]]
 title = "Green Chemistry for a Membrane-Free Electrolytic Flow Battery"
-subtitle = "AEI GreenFloBat Project TED2021-132707B-I00"
+subtitle = "AEI GreenFloBat Project TED2021-******B-I00"
 date = "2022-12 – 2024-11"
 content = "Participated in experimental design and data analysis for membrane-free flow-battery energy storage."
 tags = ["Flow batteries", "Energy storage"]

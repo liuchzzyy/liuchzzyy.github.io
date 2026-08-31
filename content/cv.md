@@ -25,12 +25,12 @@ Email: [liuchzzyy@gmail.com](mailto:liuchzzyy@gmail.com) · ORCID: [0000-0001-89
 
 ### Selected Research Projects
 
-- **Development of Advanced Carbon-Sulfur Composites** — CSIC iMOVE Project IMOVE23074, Sapienza University of Rome (*2023.10–2023.12*).
-- **Local Chemistry for Sustainable and Rechargeable Zn-Metal Batteries** — AEI SuReZiB Project PID2021124681OB-I00 (*2022.09–2025.08*).
-- **Green Chemistry for a Membrane-Free Electrolytic Flow Battery** — AEI GreenFloBat Project TED2021-132707B-I00 (*2022.12–2024.11*).
+- **Development of Advanced Carbon-Sulfur Composites** — CSIC iMOVE Project IMOVE*****, Sapienza University of Rome (*2023.10–2023.12*).
+- **Local Chemistry for Sustainable and Rechargeable Zn-Metal Batteries** — AEI SuReZiB Project PID2021******B-I00 (*2022.09–2025.08*).
+- **Green Chemistry for a Membrane-Free Electrolytic Flow Battery** — AEI GreenFloBat Project TED2021-******B-I00 (*2022.12–2024.11*).
 
 ### Fellowships & Awards
 
 - **Best Poster Prize**, 74th Annual Meeting of the International Society of Electrochemistry (*2023.09*), for *Operando Bidimensional EXAFS Study on Aqueous Zn–MnO<sub>2</sub> Batteries*.
-- **CSIC iMOVE Project Funding**, IMOVE23074 (*2023–2024*).
-- **Chinese Government Scholarship**, China Scholarship Council, No. 202106370079 (*2021–2025*).
+- **CSIC iMOVE Project Funding**, IMOVE***** (*2023–2024*).
+- **Chinese Government Scholarship**, China Scholarship Council, No. 202106***079 (*2021–2025*).

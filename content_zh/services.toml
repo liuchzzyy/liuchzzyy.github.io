@@ -4,21 +4,21 @@ description = "部分科研项目与合作经历。"
 
 [[items]]
 title = "先进碳硫复合材料的构建"
-subtitle = "CSIC iMOVE 项目 IMOVE23074"
+subtitle = "CSIC iMOVE 项目 IMOVE*****"
 date = "2023-10 – 2023-12"
 content = "在罗马第一大学主持短期项目，开展碳硫复合材料、水系锌电池原位拉曼表征以及 PCA/MCR-ALS 数据分析。"
 tags = ["水系锌电池", "原位拉曼", "数据分析"]
 
 [[items]]
 title = "可持续可充电锌金属电池的局部化学"
-subtitle = "AEI SuReZiB 项目 PID2021124681OB-I00"
+subtitle = "AEI SuReZiB 项目 PID2021******B-I00"
 date = "2022-09 – 2025-08"
 content = "参与可持续锌金属电池的原位表征、数据分析及项目结题报告。"
 tags = ["锌金属电池", "原位表征"]
 
 [[items]]
 title = "无隔膜电解液液流电池的绿色化学"
-subtitle = "AEI GreenFloBat 项目 TED2021-132707B-I00"
+subtitle = "AEI GreenFloBat 项目 TED2021-******B-I00"
 date = "2022-12 – 2024-11"
 content = "参与无隔膜液流电池的实验设计与数据分析。"
 tags = ["液流电池", "储能"]
