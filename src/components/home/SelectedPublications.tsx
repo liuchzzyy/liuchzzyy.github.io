@@ -72,12 +72,12 @@ export default function SelectedPublications({ publications, title, enableOnePag
                             <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 items-start">
                                 {pub.preview && (
                                     <div className="w-full sm:w-44 flex-shrink-0">
-                                        <div className="aspect-[16/10] sm:aspect-[4/3] relative rounded-lg overflow-hidden border border-border-subtle bg-surface-subtle">
+                                        <div className="aspect-[16/10] sm:aspect-[4/3] relative rounded-lg overflow-hidden border border-border-subtle bg-white">
                                             <Image
                                                 src={`/papers/${pub.preview}`}
                                                 alt={`${pub.title} graphical abstract`}
                                                 fill
-                                                className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                                                className="object-contain p-1.5 transition-transform duration-300 group-hover:scale-[1.02]"
                                                 sizes="(max-width: 640px) 100vw, 176px"
                                             />
                                         </div>
