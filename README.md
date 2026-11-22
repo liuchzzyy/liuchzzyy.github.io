@@ -1,141 +1,88 @@
-<div align="center">
-  <img src="./logo.png" alt="PRISM Logo" height="100"/>
-</div>
+# Dr. Cheng Liu — Academic Website
 
-# PRISM
+**English** · [中文](README_cn.md) · [Live Site](https://liuchzzyy.github.io) · [Design System](DESIGN.md) · [Changelog](CHANGELOG.md)
 
-**English** · [中文](README_cn.md) · [Live site](https://liuchzzyy.github.io) · [Changelog](CHANGELOG.md)
+Personal academic website of **Cheng Liu** (Institute of Materials Science of Barcelona, ICMAB-CSIC & Universitat Autònoma de Barcelona), built on [PRISM](https://github.com/xyjoey/PRISM) with a customized **Editorial Academic** visual system.
 
-**If you like this project, please give it a star ⭐️**
+## Features
 
-PRISM stands for **P**ortfolio & **R**esearch **I**nterface **S**ite **M**aker. It is a modern, configurable, and high-performance personal website template built with Next.js, Tailwind CSS, and TypeScript. It is designed for researchers, developers, and academics to showcase their work, publications, and portfolio with ease.
+- **Editorial Academic Design**: Warm ivory light mode (`#FAF9F6`) and deep midnight dark mode (`#0D1321`) with antique amber-bronze accents, pairing `Newsreader`, `Inter`, `JetBrains Mono`, and CJK serif fallbacks (see [DESIGN.md](DESIGN.md)).
+- **Configuration-Driven Bilingual Content**: English (`content/`) and Chinese (`content_zh/`) content managed cleanly with TOML, Markdown, and BibTeX, with automatic locale fallback.
+- **BibTeX-Driven Publications with TOC Cards**:
+  - Every publication renders as a **TOC graphical abstract + metadata** card (`public/papers/1.jpg`–`25.jpg`).
+  - Manual `selected = {true/false}` control for homepage Selected Publications.
+  - Verified co-author ORCID links (`author_orcids`), co-first author underline (`#`), and multi-corresponding author asterisk (`*`) support.
+  - Live search, Year/Type filters, expandable BibTeX view, and one-click BibTeX copy.
+- **Direct CV PDF Download**: `/cv/` renders structured Markdown alongside a one-click **Download PDF** button serving `public/cv.pdf`.
+- **Static Export & Feeds**: Built with Next.js 15 (`output: 'export'`), Tailwind CSS v4, TypeScript, and Framer Motion, automatically generating RSS/Atom feeds and deploying to GitHub Pages via GitHub Actions.
 
-Feel free to customize your own version of PRISM with coding agents.
-
-![PRISM Preview](screenshot.png)
-
-## ✨ Features
-
-*   **📄 Configuration-Driven**: Manage your entire site's content using simple `TOML`, `Markdown`, and `BibTeX` files in the `content/` directory. No code changes required for content updates!
-*   **📚 BibTeX Support**: Directly render your publications from a `.bib` file. Includes search, filtering (Year, Type), and automatic citation generation.
-*   **🎨 Modern Design**: Clean, responsive UI with a beautiful serif/sans-serif typography pairing, smooth animations (Framer Motion), and Dark Mode support.
-*   **⚡️ High Performance**: Built on Next.js 20 with Turbopack. Static export ensures blazing fast load times and easy deployment.
-*   **🔍 SEO Optimized**: Dynamic metadata generation for every page.
-*   **🧩 Dynamic Routing**: Easily add new pages by simply creating a config file.
-
-## 🚀 Getting Started
+## Local Development
 
 ### Prerequisites
 
-*   Node.js 22 or later
-    *   **Important**: Please download and install Node.js manually from [https://nodejs.org/en/download](https://nodejs.org/en/download).
-    *   Better not to use the pre-installed version on your system, as it may be outdated or incompatible.
-*   npm, pnpm, or yarn
+- Node.js 22+
+- npm
 
-### Installation
-
-1.  **Clone the repository:**
-
-    ```bash
-    git clone https://github.com/liuchzzyy/PRISM.git
-    cd PRISM
-    ```
-
-2.  **Install dependencies:**
-
-    ```bash
-    npm install
-    ```
-
-3.  **Run the development server:**
-
-    ```bash
-    npm run dev
-    ```
-
-    Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-## 🛠️ Configuration
-
-All content lives in the `content/` directory.
-
-### 1. Global Site Config (`content/config.toml`)
-Configure your site title, author details, social links, and navigation menu here.
-
-```toml
-[site]
-title = "Your Name"
-description = "Personal website of Your Name"
-url = "https://your-website.com"
-
-[author]
-name = "Your Name"
-title = "PhD Student / Researcher"
-# ...
-
-[features]
-enable_likes = true
-```
-
-### 2. Homepage (`content/about.toml`)
-Customize the "About" section, "News", and "Selected Publications" on the homepage.
-
-### 3. Publications (`content/publications.bib`)
-Export your publications from Google Scholar, Zotero, or Mendeley to `content/publications.bib`. PRISM automatically parses this file to generate your Publications page. Customize the display of publications by changing `selected`, `preview` and `description` keys in the bib file. 
-
-Publication titles support a subset of BibTeX inline formatting commands, including `\textit{}`, `\emph{}`, `\textbf{}`, `\textsc{}`, `\textsuperscript{}` and `\textsubscript{}`.
-
-### 4. Adding New Pages
-To add a new page (e.g., "Projects"), create a TOML file in `content/` (e.g., `content/projects.toml`) and add it to the `navigation` list in `content/config.toml`.
-
-Supported page types:
-*   `text`: Renders Markdown content (Great for CVs, Bio).
-*   `card`: Renders a list of cards (Great for Projects, Awards). Content of each card item supports Markdown.
-*   `publication`: Renders the full publications list with filters.
-
-### 5. I18N Support (`content_<locale>/`)
-PRISM now supports i18n, i.e., multi-language.
-
-*   Default language lives in `content/`.
-*   Additional languages live in `content_<locale>/` (for example: `content_zh/`, `content_en/`).
-*   Keep the same filenames across directories. Example:
-    *   `content/cv.md` (default)
-    *   `content_zh/cv.md`
-*   If a localized file is missing, PRISM automatically falls back to the default `content/` version.
-
-Configure language behavior in `content/config.toml`:
-
-## 📦 Deployment
-
-PRISM is optimized for static deployment.
+### Commands
 
 ```bash
-npm run build
+git clone git@github.com:liuchzzyy/liuchzzyy.github.io.git
+cd liuchzzyy.github.io
+npm install
+npm run dev      # Local preview at http://localhost:3000
+npm run lint     # ESLint checks
+npm run build    # Static export to out/ + RSS/Atom generation
 ```
 
-This generates a static `out/` directory that can be hosted anywhere.
+## Content Maintenance Guide
 
-👉 **[Read the full Deployment Guide](docs/deployment.md)** for instructions on deploying to **GitHub Pages** and **Cloudflare Pages**.
+### 1. Site Settings & Last Updated Date
+Edit [`content/config.toml`](content/config.toml) (English) and [`content_zh/config.toml`](content_zh/config.toml) (Chinese) to update bio metadata, navigation items, social links, work address, or `site.last_updated`.
 
-## 📂 Project Structure
+### 2. Publications (`content/publications.bib`)
+Each entry supports standard BibTeX fields plus the following extensions:
+- `selected = {true}` / `{false}`: Controls whether the paper appears in **Selected Publications** on the homepage.
+- `preview = {<filename>}`: TOC image located under `public/papers/` (currently `1.jpg`–`25.jpg` in reverse-chronological display order). Replace the corresponding placeholder image to update a paper's TOC graphic.
+- Author markers in `author = {...}`:
+  - Append `#` for co-first authors (rendered underlined).
+  - Append `*` for corresponding authors (rendered as superscript `*`; multiple corresponding authors are supported).
+- `author_orcids = {Last, First|0000-0000-0000-0000; ...}`: Verified ORCID profile links for co-authors.
+- Inline LaTeX title formatting: supports `\textit{}`, `\emph{}`, `\textbf{}`, `\textsc{}`, `\textsuperscript{}`, and `\textsubscript{}`.
 
-```
-PRISM/
-├── content/              # All user-editable content (TOML, BibTeX, MD)
-├── public/               # Static assets (images, papers)
+### 3. Curriculum Vitae & PDF Download
+- Update the web CV text in `content/cv.md` and `content_zh/cv.md`.
+- Replace [`public/cv.pdf`](public/cv.pdf) with your generated CV PDF file. Download path and filename are configured in `content/cv.toml` and `content_zh/cv.toml` (`pdf` and `pdf_filename`).
+
+### 4. Pages & Localization
+- Default (English) content lives in `content/`; Chinese overrides live in `content_zh/`.
+- Supported page types: `about`, `publication`, `card` (`teaching`, `services`, `awards`), `list` (`news`), and `text` (`cv`).
+
+## Project Structure
+
+```text
+liuchzzyy.github.io/
+├── .github/workflows/deploy.yml  # Automated GitHub Pages build & deploy
+├── content/                      # English content (TOML, Markdown, BibTeX)
+├── content_zh/                   # Chinese localized content
+├── public/
+│   ├── bio.jpg                   # Profile avatar
+│   ├── cv.pdf                    # Downloadable CV PDF
+│   └── papers/                   # Publication TOC graphics (1.jpg–25.jpg)
+├── scripts/generate-rss.js       # Static RSS & Atom feed generator
 ├── src/
-│   ├── app/              # Next.js App Router
-│   ├── components/       # React components
-│   ├── lib/              # Utility functions (parsers, config loaders)
-│   └── types/            # TypeScript definitions
-├── next.config.ts        # Next.js configuration
-└── tailwind.config.ts    # Tailwind CSS configuration
+│   ├── app/                      # Next.js App Router pages & global styles
+│   ├── components/               # Home, layout, publications, pages, and UI components
+│   ├── lib/                      # BibTeX/TOML/Markdown loaders, i18n, and stores
+│   └── types/                    # TypeScript interfaces
+├── DESIGN.md                     # Editorial Academic design system specification
+└── next.config.ts                # Static export configuration
 ```
 
-## 🤝 Contributing
+## Deployment
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Pushing to the `main` branch automatically triggers [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml), which builds the static site into `out/`, verifies `out/rss/feed.xml` and `out/rss/feed-atom.xml`, and publishes to GitHub Pages. See [docs/deployment.md](docs/deployment.md) for additional hosting options.
 
-## 📄 License
+## Credits & License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+- Built with [PRISM](https://github.com/xyjoey/PRISM) (**P**ortfolio & **R**esearch **I**nterface **S**ite **M**aker).
+- Licensed under the [MIT License](LICENSE).

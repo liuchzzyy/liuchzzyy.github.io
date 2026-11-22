@@ -39,7 +39,7 @@ export default function Footer({ lastUpdated, lastUpdatedByLocale, defaultLocale
             </a>
             <span className="text-border-strong" aria-hidden="true">·</span>
             <a
-              href="https://github.com/liuchzzyy/PRISM"
+              href="https://github.com/xyjoey/PRISM"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-accent transition-colors"
