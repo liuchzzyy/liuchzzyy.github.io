@@ -12,6 +12,8 @@ export interface PublicationPageConfig extends BasePageConfig {
 export interface TextPageConfig extends BasePageConfig {
     type: 'text';
     source: string;
+    pdf?: string;
+    pdf_filename?: string;
 }
 
 export interface CardItem {

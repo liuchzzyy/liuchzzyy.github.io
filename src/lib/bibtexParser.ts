@@ -169,6 +169,14 @@ function buildNameVariants(name: string): Set<string> {
     variants.add(withoutHonorific);
   }
 
+  if (withoutHonorific.includes(',')) {
+    const commaParts = withoutHonorific.split(',').map((p) => p.trim()).filter(Boolean);
+    if (commaParts.length >= 2) {
+      const flipped = `${commaParts.slice(1).join(' ')} ${commaParts[0]}`.trim();
+      variants.add(flipped);
+    }
+  }
+
   const parts = withoutHonorific.split(/\s+/).filter(Boolean);
   if (parts.length === 2) {
     variants.add(`${parts[1]} ${parts[0]}`);

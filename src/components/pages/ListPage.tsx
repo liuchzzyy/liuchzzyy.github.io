@@ -15,23 +15,42 @@ export default function ListPage({ config, embedded = false }: ListPageProps) {
 
     return (
         <section className={embedded ? '' : 'max-w-4xl mx-auto'}>
-            <header className="mb-8">
-                <h1 className="text-3xl font-serif font-bold text-primary mb-3">{config.title}</h1>
+            <header className="mb-8 border-b border-border-subtle pb-5">
+                <h1 className="text-3xl sm:text-4xl font-serif font-semibold tracking-tight text-primary mb-2">
+                    {config.title}
+                </h1>
                 {config.description && (
-                    <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">{config.description}</p>
+                    <p className="text-neutral-600 text-[1.02rem] leading-relaxed">{config.description}</p>
                 )}
             </header>
-            <div className="space-y-4">
+            <div className="relative border-l border-border-subtle ml-2 pl-6 space-y-5">
                 {sortedItems.map((item) => (
                     <article
                         key={`${item.date}-${item.content}`}
-                        className="flex items-start space-x-4 border-l-2 border-accent/30 pl-4 py-1"
+                        className="relative flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4"
                     >
-                        <time className="text-xs text-neutral-500 mt-1 w-16 flex-shrink-0">{item.date}</time>
-                        <div className="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed">
+                        <span
+                            className="absolute -left-[29px] top-[7px] w-2 h-2 rounded-full bg-accent ring-4 ring-background"
+                            aria-hidden="true"
+                        />
+                        <time className="font-mono text-xs text-accent bg-accent-soft px-2 py-0.5 rounded w-fit flex-shrink-0">
+                            {item.date}
+                        </time>
+                        <div className="text-[0.94rem] text-neutral-700 leading-relaxed">
                             <ReactMarkdown
                                 rehypePlugins={[rehypeRaw, rehypeSanitize]}
-                                components={{ p: ({ children }) => <span>{children}</span> }}
+                                components={{
+                                    p: ({ children }) => <span>{children}</span>,
+                                    em: ({ children }) => <em className="font-serif italic text-primary">{children}</em>,
+                                    a: ({ ...props }) => (
+                                        <a
+                                            {...props}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-accent underline decoration-accent/40 underline-offset-4 hover:decoration-accent"
+                                        />
+                                    ),
+                                }}
                             >
                                 {item.content}
                             </ReactMarkdown>

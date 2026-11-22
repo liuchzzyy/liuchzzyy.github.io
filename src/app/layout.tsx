@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Inter, Newsreader, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import Navigation from '@/components/layout/Navigation';
 import Footer from '@/components/layout/Footer';
@@ -7,6 +8,27 @@ import { LocaleProvider } from '@/components/ui/LocaleProvider';
 import { getConfig } from '@/lib/config';
 import { getRuntimeI18nConfig } from '@/lib/i18n/config';
 import type { SiteConfig } from '@/lib/config';
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+});
+
+const newsreader = Newsreader({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-newsreader',
+  display: 'swap',
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-jetbrains-mono',
+  display: 'swap',
+});
 
 function stripMarkup(value: string): string {
   return value.replace(/<[^>]*>/g, '');
@@ -144,7 +166,11 @@ export default function RootLayout({
   } = buildLocalizedConfigMaps(targetLocales);
 
   return (
-    <html lang={runtimeI18n.defaultLocale} className="scroll-smooth" suppressHydrationWarning>
+    <html
+      lang={runtimeI18n.defaultLocale}
+      className={`scroll-smooth ${inter.variable} ${newsreader.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <link rel="icon" href={config.site.favicon} type="image/svg+xml" />
         <script
@@ -173,7 +199,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="font-sans antialiased">
+      <body className="font-sans antialiased editorial-canvas">
         <ThemeProvider>
           <LocaleProvider config={runtimeI18n}>
             <Navigation

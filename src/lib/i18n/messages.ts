@@ -1,7 +1,9 @@
 export interface LocaleMessages {
   common: {
     all: string;
+    copy: string;
     copyToClipboard: string;
+    copied: string;
   };
   navigation: {
     openMainMenu: string;
@@ -41,6 +43,7 @@ export interface LocaleMessages {
     abstract: string;
     bibtex: string;
     code: string;
+    authorLegend: string;
   };
   footer: {
     lastUpdated: string;
@@ -51,7 +54,9 @@ export interface LocaleMessages {
 const en: LocaleMessages = {
   common: {
     all: 'All',
+    copy: 'Copy',
     copyToClipboard: 'Copy to clipboard',
+    copied: 'Copied',
   },
   navigation: {
     openMainMenu: 'Open main menu',
@@ -91,6 +96,7 @@ const en: LocaleMessages = {
     abstract: 'Abstract',
     bibtex: 'BibTeX',
     code: 'Code',
+    authorLegend: '* Corresponding author · Underline: Co-first author',
   },
   footer: {
     lastUpdated: 'Last updated',
@@ -101,7 +107,9 @@ const en: LocaleMessages = {
 const zh: LocaleMessages = {
   common: {
     all: '全部',
+    copy: '复制',
     copyToClipboard: '复制到剪贴板',
+    copied: '已复制',
   },
   navigation: {
     openMainMenu: '打开主菜单',
@@ -141,6 +149,7 @@ const zh: LocaleMessages = {
     abstract: '摘要',
     bibtex: 'BibTeX',
     code: '代码',
+    authorLegend: '* 通讯作者 · 下划线：共同第一作者',
   },
   footer: {
     lastUpdated: '最近更新',

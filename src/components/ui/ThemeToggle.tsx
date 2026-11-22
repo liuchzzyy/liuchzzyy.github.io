@@ -48,8 +48,8 @@ export function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <div className="flex items-center justify-center w-10 h-10 rounded-lg border border-neutral-200 dark:border-[rgba(148,163,184,0.24)] bg-background dark:bg-neutral-800">
-        <div className="w-4 h-4 rounded-full bg-neutral-300 animate-pulse" />
+      <div className="flex items-center justify-center w-9 h-9 rounded-lg border border-border-subtle bg-surface">
+        <div className="w-4 h-4 rounded-full bg-surface-subtle animate-pulse" />
       </div>
     );
   }
@@ -59,8 +59,8 @@ export function ThemeToggle() {
   return (
     <div className="relative">
       <motion.button
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
+        whileHover={{ scale: 1.03 }}
+        whileTap={{ scale: 0.96 }}
         type="button"
         onMouseDown={(e) => e.preventDefault()}
         onClick={() => {
@@ -70,19 +70,19 @@ export function ThemeToggle() {
           setTheme(next);
         }}
         className={cn(
-          'flex items-center justify-center w-10 h-10 rounded-lg',
-          'border border-neutral-200 bg-background hover:bg-neutral-50',
-          'dark:border-[rgba(148,163,184,0.24)] dark:bg-neutral-800 dark:hover:bg-neutral-700',
-          'transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50',
-          'text-neutral-600 hover:text-primary dark:text-neutral-400 dark:hover:text-white'
+          'flex items-center justify-center w-9 h-9 rounded-lg cursor-pointer',
+          'border border-border-subtle bg-surface hover:bg-surface-subtle hover:border-border-strong',
+          'text-neutral-600 hover:text-primary',
+          'transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50'
         )}
         title={`${messages.theme.currentTheme}: ${currentTheme.label}. ${messages.theme.cycleTheme}.`}
+        aria-label={`${messages.theme.currentTheme}: ${currentTheme.label}`}
       >
         <motion.div
           key={theme}
-          initial={{ rotate: -180, opacity: 0 }}
+          initial={{ rotate: -90, opacity: 0 }}
           animate={{ rotate: 0, opacity: 1 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.22 }}
         >
           {theme === 'system' ? (
             <ComputerDesktopIcon className="h-4 w-4" />
@@ -110,8 +110,8 @@ export function ThemeToggleDropdown() {
 
   if (!mounted) {
     return (
-      <div className="flex items-center justify-center w-10 h-10 rounded-lg border border-neutral-200 dark:border-[rgba(148,163,184,0.24)] bg-background dark:bg-neutral-800">
-        <div className="w-4 h-4 rounded-full bg-neutral-300 animate-pulse" />
+      <div className="flex items-center justify-center w-9 h-9 rounded-lg border border-border-subtle bg-surface">
+        <div className="w-4 h-4 rounded-full bg-surface-subtle animate-pulse" />
       </div>
     );
   }
@@ -121,25 +121,24 @@ export function ThemeToggleDropdown() {
   return (
     <div className="relative">
       <motion.button
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
+        whileHover={{ scale: 1.03 }}
+        whileTap={{ scale: 0.96 }}
         type="button"
         onMouseDown={(e) => e.preventDefault()}
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
-          'flex items-center justify-center w-10 h-10 rounded-lg',
-          'border border-neutral-200 bg-background hover:bg-neutral-50',
-          'dark:border-[rgba(148,163,184,0.24)] dark:bg-neutral-800 dark:hover:bg-neutral-700',
-          'transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50',
-          'text-neutral-600 hover:text-primary dark:text-neutral-400 dark:hover:text-white'
+          'flex items-center justify-center w-9 h-9 rounded-lg cursor-pointer',
+          'border border-border-subtle bg-surface hover:bg-surface-subtle hover:border-border-strong',
+          'text-neutral-600 hover:text-primary',
+          'transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50'
         )}
         title={`${messages.theme.currentTheme}: ${currentTheme.label}`}
       >
         <motion.div
           key={theme}
-          initial={{ rotate: -180, opacity: 0 }}
+          initial={{ rotate: -90, opacity: 0 }}
           animate={{ rotate: 0, opacity: 1 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.22 }}
         >
           {currentTheme.icon}
         </motion.div>
@@ -147,13 +146,12 @@ export function ThemeToggleDropdown() {
 
       {isOpen && (
         <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: -10 }}
+          initial={{ opacity: 0, scale: 0.96, y: -6 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.95, y: -10 }}
+          exit={{ opacity: 0, scale: 0.96, y: -6 }}
           className={cn(
-            'absolute right-0 mt-2 w-32 rounded-lg shadow-lg border',
-            'bg-background border-neutral-200 dark:border-[rgba(148,163,184,0.24)]',
-            'dark:bg-neutral-800 z-50'
+            'absolute right-0 mt-2 w-36 rounded-xl shadow-lg border',
+            'bg-surface border-border-subtle z-50 overflow-hidden'
           )}
         >
           <div className="py-1">
@@ -165,12 +163,11 @@ export function ThemeToggleDropdown() {
                   setIsOpen(false);
                 }}
                 className={cn(
-                  'flex items-center w-full px-3 py-2 text-sm',
-                  'hover:bg-neutral-50 dark:hover:bg-neutral-700',
-                  'transition-colors duration-200',
+                  'flex items-center w-full px-3 py-2 text-sm cursor-pointer',
+                  'hover:bg-surface-subtle transition-colors duration-150',
                   theme === themeOption.value
-                    ? 'text-accent bg-accent/10'
-                    : 'text-neutral-700 dark:text-neutral-300'
+                    ? 'text-accent bg-accent-soft font-medium'
+                    : 'text-neutral-700'
                 )}
               >
                 <span className="mr-2">{themeOption.icon}</span>

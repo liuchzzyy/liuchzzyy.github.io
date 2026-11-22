@@ -56,11 +56,11 @@ export default function Navigation({
 
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 20;
-      setScrolled(isScrolled);
+      setScrolled(window.scrollY > 12);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -136,7 +136,7 @@ export default function Navigation({
     const el = container.querySelector<HTMLElement>(
       `[data-nav-href="${CSS.escape(indicatorHref)}"]`
     );
-    if (!el) {
+    if (!el || el.offsetWidth === 0) {
       setIndicatorStyle(null);
       return;
     }
@@ -149,8 +149,11 @@ export default function Navigation({
   }, [indicatorHref]);
 
   useEffect(() => {
-    measureIndicator();
-  }, [measureIndicator]);
+    const rafId = window.requestAnimationFrame(() => {
+      measureIndicator();
+    });
+    return () => window.cancelAnimationFrame(rafId);
+  }, [measureIndicator, effectiveItems, resolvedLocale]);
 
   useEffect(() => {
     window.addEventListener('resize', measureIndicator);
@@ -162,33 +165,29 @@ export default function Navigation({
       {({ open }) => (
         <>
           <motion.div
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
-            transition={{ duration: 0.6 }}
+            initial={{ y: -64, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.45, ease: 'easeOut' }}
             className={cn(
-              'transition-all duration-300 ease-out',
+              'transition-all duration-300 ease-out border-b',
               scrolled
-                ? 'bg-background/80 backdrop-blur-xl border-b border-neutral-200/50 shadow-lg'
-                : 'bg-transparent'
+                ? 'bg-background/88 backdrop-blur-xl border-border-subtle shadow-[0_4px_20px_-12px_rgba(22,32,50,0.16)]'
+                : 'bg-background/70 backdrop-blur-md border-border-subtle/55'
             )}
           >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="flex justify-between items-center h-16 lg:h-20">
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="flex-shrink-0"
-                >
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex justify-between items-center h-16 lg:h-[4.25rem]">
+                <div className="flex-shrink-0">
                   <Link
                     href="/"
-                    className="text-xl lg:text-2xl font-serif font-semibold text-primary hover:text-accent transition-colors duration-200"
+                    className="group inline-flex items-baseline gap-2 text-xl lg:text-[1.4rem] font-serif font-semibold tracking-tight text-primary hover:text-accent transition-colors duration-200"
                   >
-                    {effectiveSiteTitle}
+                    <span>{effectiveSiteTitle}</span>
                   </Link>
-                </motion.div>
+                </div>
 
                 <div className="hidden lg:block">
-                  <div className="ml-10 flex items-center space-x-3">
+                  <div className="ml-8 flex items-center space-x-2.5">
                     <div
                       ref={navContainerRef}
                       className="relative flex items-baseline space-x-1"
@@ -199,8 +198,8 @@ export default function Navigation({
                           className={cn(
                             'absolute rounded-lg pointer-events-none',
                             hoveredHref && hoveredHref !== activeHref
-                              ? 'bg-accent/[0.07]'
-                              : 'bg-accent/10'
+                              ? 'bg-surface-subtle'
+                              : 'bg-accent-soft'
                           )}
                           initial={false}
                           animate={{
@@ -211,8 +210,8 @@ export default function Navigation({
                           }}
                           transition={{
                             type: 'spring',
-                            stiffness: 400,
-                            damping: 28,
+                            stiffness: 420,
+                            damping: 32,
                           }}
                         />
                       )}
@@ -229,12 +228,12 @@ export default function Navigation({
                             onClick={() => enableOnePageMode && setActiveHash(`#${item.target}`)}
                             onMouseEnter={() => setHoveredHref(href)}
                             className={cn(
-                              'relative px-3 py-2 text-sm font-medium rounded-lg transition-colors duration-150',
+                              'relative px-3 py-1.5 text-[0.875rem] rounded-lg transition-colors duration-150',
                               isActive
-                                ? 'text-primary'
+                                ? 'text-primary font-semibold'
                                 : hoveredHref === href
-                                  ? 'text-primary'
-                                  : 'text-neutral-600'
+                                  ? 'text-primary font-medium'
+                                  : 'text-neutral-600 font-medium'
                             )}
                           >
                             {item.title}
@@ -242,6 +241,7 @@ export default function Navigation({
                         );
                       })}
                     </div>
+                    <div className="h-4 w-px bg-border-subtle mx-1" aria-hidden="true" />
                     <LanguageToggle i18n={i18n} />
                     <ThemeToggle />
                   </div>
@@ -250,16 +250,16 @@ export default function Navigation({
                 <div className="lg:hidden flex items-center space-x-2">
                   <LanguageToggle i18n={i18n} />
                   <ThemeToggle />
-                  <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-neutral-600 hover:text-primary hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent transition-colors duration-200">
+                  <Disclosure.Button className="inline-flex items-center justify-center w-9 h-9 rounded-lg border border-border-subtle bg-surface text-neutral-600 hover:text-primary hover:bg-surface-subtle focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 transition-colors duration-200">
                     <span className="sr-only">{messages.navigation.openMainMenu}</span>
                     <motion.div
-                      animate={{ rotate: open ? 180 : 0 }}
+                      animate={{ rotate: open ? 90 : 0 }}
                       transition={{ duration: 0.2 }}
                     >
                       {open ? (
-                        <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+                        <XMarkIcon className="block h-5 w-5" aria-hidden="true" />
                       ) : (
-                        <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                        <Bars3Icon className="block h-5 w-5" aria-hidden="true" />
                       )}
                     </motion.div>
                   </Disclosure.Button>
@@ -275,10 +275,10 @@ export default function Navigation({
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
                   exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="lg:hidden bg-background/95 backdrop-blur-xl border-b border-neutral-200/50 shadow-lg"
+                  transition={{ duration: 0.24 }}
+                  className="lg:hidden bg-background/95 backdrop-blur-xl border-b border-border-subtle shadow-lg overflow-hidden"
                 >
-                  <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                  <div className="px-4 pt-2 pb-4 space-y-1">
                     {effectiveItems.map((item, index) => {
                       const isActive = enableOnePageMode
                         ? (item.href === '/' ? pathname === '/' && !activeHash : activeHash === `#${item.target}`)
@@ -293,9 +293,9 @@ export default function Navigation({
                       return (
                         <motion.div
                           key={item.target}
-                          initial={{ opacity: 0, x: -20 }}
+                          initial={{ opacity: 0, x: -12 }}
                           animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: index * 0.1 }}
+                          transition={{ delay: index * 0.04 }}
                         >
                           <Disclosure.Button
                             as={Link}
@@ -303,10 +303,10 @@ export default function Navigation({
                             prefetch={true}
                             onClick={() => enableOnePageMode && setActiveHash(item.href === '/' ? '' : `#${item.target}`)}
                             className={cn(
-                              'block px-3 py-2 rounded-md text-base font-medium transition-all duration-200',
+                              'block px-3.5 py-2.5 rounded-lg text-sm transition-colors duration-150',
                               isActive
-                                ? 'text-primary bg-accent/10 border-l-4 border-accent'
-                                : 'text-neutral-600 hover:text-primary hover:bg-neutral-50'
+                                ? 'text-accent bg-accent-soft font-semibold'
+                                : 'text-neutral-600 font-medium hover:text-primary hover:bg-surface-subtle/60'
                             )}
                           >
                             {item.title}

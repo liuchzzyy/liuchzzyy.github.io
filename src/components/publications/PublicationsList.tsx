@@ -9,7 +9,9 @@ import {
     CalendarIcon,
     BookOpenIcon,
     ClipboardDocumentIcon,
-    DocumentTextIcon
+    DocumentTextIcon,
+    CheckIcon,
+    ArrowUpRightIcon,
 } from '@heroicons/react/24/outline';
 import { Publication } from '@/types/publication';
 import { PublicationPageConfig } from '@/types/page';
@@ -31,24 +33,23 @@ export default function PublicationsList({ config, publications, embedded = fals
     const [showFilters, setShowFilters] = useState(false);
     const [expandedBibtexId, setExpandedBibtexId] = useState<string | null>(null);
     const [expandedAbstractId, setExpandedAbstractId] = useState<string | null>(null);
+    const [copiedId, setCopiedId] = useState<string | null>(null);
 
-    // Extract unique years and types for filters
     const years = useMemo(() => {
-        const uniqueYears = Array.from(new Set(publications.map(p => p.year)));
+        const uniqueYears = Array.from(new Set(publications.map((p) => p.year)));
         return uniqueYears.sort((a, b) => b - a);
     }, [publications]);
 
     const types = useMemo(() => {
-        const uniqueTypes = Array.from(new Set(publications.map(p => p.type)));
+        const uniqueTypes = Array.from(new Set(publications.map((p) => p.type)));
         return uniqueTypes.sort();
     }, [publications]);
 
-    // Filter publications
     const filteredPublications = useMemo(() => {
-        return publications.filter(pub => {
+        return publications.filter((pub) => {
             const matchesSearch =
                 pub.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                pub.authors.some(author => author.name.toLowerCase().includes(searchQuery.toLowerCase())) ||
+                pub.authors.some((author) => author.name.toLowerCase().includes(searchQuery.toLowerCase())) ||
                 pub.journal?.toLowerCase().includes(searchQuery.toLowerCase()) ||
                 pub.conference?.toLowerCase().includes(searchQuery.toLowerCase());
 
@@ -59,46 +60,69 @@ export default function PublicationsList({ config, publications, embedded = fals
         });
     }, [publications, searchQuery, selectedYear, selectedType]);
 
+    const handleCopyBibtex = async (id: string, bibtex?: string) => {
+        if (!bibtex) return;
+        try {
+            await navigator.clipboard.writeText(bibtex);
+            setCopiedId(id);
+            setTimeout(() => {
+                setCopiedId((prev) => (prev === id ? null : prev));
+            }, 1800);
+        } catch {
+            // Clipboard unavailable
+        }
+    };
+
     return (
         <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            transition={{ duration: 0.45 }}
         >
-            <div className="mb-8">
-                <h1 className={`${embedded ? "text-2xl" : "text-4xl"} font-serif font-bold text-primary mb-4`}>{config.title}</h1>
+            <header className="mb-8 border-b border-border-subtle pb-5">
+                <div className="flex items-baseline justify-between gap-4">
+                    <h1 className={`${embedded ? 'text-2xl' : 'text-3xl sm:text-4xl'} font-serif font-semibold tracking-tight text-primary mb-2`}>
+                        {config.title}
+                    </h1>
+                    <span className="font-mono text-xs text-neutral-500 flex-shrink-0">
+                        {filteredPublications.length} / {publications.length}
+                    </span>
+                </div>
                 {config.description && (
-                    <p className={`${embedded ? "text-base" : "text-lg"} text-neutral-600 dark:text-neutral-500 max-w-2xl`}>
+                    <p className={`${embedded ? 'text-base' : 'text-[1.02rem]'} text-neutral-600 max-w-2xl leading-relaxed`}>
                         {config.description}
                     </p>
                 )}
-            </div>
+                <p className="mt-2 text-xs text-neutral-500">
+                    {messages.publications.authorLegend}
+                </p>
+            </header>
 
             {/* Search and Filter Controls */}
-            <div className="mb-8 space-y-4">
-                {/* ... (keep existing controls) ... */}
-                <div className="flex flex-col sm:flex-row gap-4">
+            <div className="mb-8 space-y-3">
+                <div className="flex flex-col sm:flex-row gap-3">
                     <div className="relative flex-grow">
-                        <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-neutral-400" />
+                        <MagnifyingGlassIcon className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400" />
                         <input
                             type="text"
                             placeholder={messages.publications.searchPlaceholder}
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full pl-10 pr-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 focus:ring-2 focus:ring-accent focus:border-transparent transition-all duration-200"
+                            className="w-full pl-10 pr-4 py-2.5 text-sm rounded-xl border border-border-subtle bg-surface text-primary placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent transition-all duration-200"
                         />
                     </div>
                     <button
+                        type="button"
                         onClick={() => setShowFilters(!showFilters)}
                         className={cn(
-                            "flex items-center justify-center px-4 py-2 rounded-lg border transition-all duration-200",
+                            'flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border text-sm font-medium transition-colors duration-200 cursor-pointer',
                             showFilters
-                                ? "bg-accent text-white border-accent"
-                                : "bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 text-neutral-600 hover:border-accent hover:text-accent"
+                                ? 'bg-accent text-white border-accent'
+                                : 'bg-surface border-border-subtle text-neutral-700 hover:border-accent/60 hover:text-accent hover:bg-accent-soft'
                         )}
                     >
-                        <FunnelIcon className="h-5 w-5 mr-2" />
-                        {messages.publications.filters}
+                        <FunnelIcon className="h-4 w-4" />
+                        <span>{messages.publications.filters}</span>
                     </button>
                 </div>
 
@@ -110,33 +134,36 @@ export default function PublicationsList({ config, publications, embedded = fals
                             exit={{ opacity: 0, height: 0 }}
                             className="overflow-hidden"
                         >
-                            <div className="p-4 bg-neutral-50 dark:bg-neutral-800/50 rounded-lg border border-neutral-200 dark:border-neutral-800 flex flex-wrap gap-6">
+                            <div className="p-4 bg-surface rounded-xl border border-border-subtle flex flex-wrap gap-6">
                                 {/* Year Filter */}
                                 <div className="space-y-2">
-                                    <label className="text-sm font-medium text-neutral-700 dark:text-neutral-300 flex items-center">
-                                        <CalendarIcon className="h-4 w-4 mr-1" /> {messages.publications.year}
+                                    <label className="text-xs font-semibold uppercase tracking-wider text-neutral-600 flex items-center gap-1.5">
+                                        <CalendarIcon className="h-3.5 w-3.5 text-accent" />
+                                        {messages.publications.year}
                                     </label>
-                                    <div className="flex flex-wrap gap-2">
+                                    <div className="flex flex-wrap gap-1.5">
                                         <button
+                                            type="button"
                                             onClick={() => setSelectedYear('all')}
                                             className={cn(
-                                                "px-3 py-1 text-xs rounded-full transition-colors",
+                                                'px-3 py-1 text-xs rounded-full border transition-colors cursor-pointer',
                                                 selectedYear === 'all'
-                                                    ? "bg-accent text-white"
-                                                    : "bg-white dark:bg-neutral-800 text-neutral-600 hover:bg-neutral-100 dark:hover:bg-neutral-700"
+                                                    ? 'bg-accent text-white border-accent'
+                                                    : 'bg-surface-subtle border-border-subtle text-neutral-700 hover:border-border-strong'
                                             )}
                                         >
                                             {messages.common.all}
                                         </button>
-                                        {years.map(year => (
+                                        {years.map((year) => (
                                             <button
+                                                type="button"
                                                 key={year}
                                                 onClick={() => setSelectedYear(year)}
                                                 className={cn(
-                                                    "px-3 py-1 text-xs rounded-full transition-colors",
+                                                    'px-3 py-1 text-xs font-mono rounded-full border transition-colors cursor-pointer',
                                                     selectedYear === year
-                                                        ? "bg-accent text-white"
-                                                        : "bg-white dark:bg-neutral-800 text-neutral-600 hover:bg-neutral-100 dark:hover:bg-neutral-700"
+                                                        ? 'bg-accent text-white border-accent'
+                                                        : 'bg-surface-subtle border-border-subtle text-neutral-700 hover:border-border-strong'
                                                 )}
                                             >
                                                 {year}
@@ -147,30 +174,33 @@ export default function PublicationsList({ config, publications, embedded = fals
 
                                 {/* Type Filter */}
                                 <div className="space-y-2">
-                                    <label className="text-sm font-medium text-neutral-700 dark:text-neutral-300 flex items-center">
-                                        <BookOpenIcon className="h-4 w-4 mr-1" /> {messages.publications.type}
+                                    <label className="text-xs font-semibold uppercase tracking-wider text-neutral-600 flex items-center gap-1.5">
+                                        <BookOpenIcon className="h-3.5 w-3.5 text-accent" />
+                                        {messages.publications.type}
                                     </label>
-                                    <div className="flex flex-wrap gap-2">
+                                    <div className="flex flex-wrap gap-1.5">
                                         <button
+                                            type="button"
                                             onClick={() => setSelectedType('all')}
                                             className={cn(
-                                                "px-3 py-1 text-xs rounded-full transition-colors",
+                                                'px-3 py-1 text-xs rounded-full border transition-colors cursor-pointer',
                                                 selectedType === 'all'
-                                                    ? "bg-accent text-white"
-                                                    : "bg-white dark:bg-neutral-800 text-neutral-600 hover:bg-neutral-100 dark:hover:bg-neutral-700"
+                                                    ? 'bg-accent text-white border-accent'
+                                                    : 'bg-surface-subtle border-border-subtle text-neutral-700 hover:border-border-strong'
                                             )}
                                         >
                                             {messages.common.all}
                                         </button>
-                                        {types.map(type => (
+                                        {types.map((type) => (
                                             <button
+                                                type="button"
                                                 key={type}
                                                 onClick={() => setSelectedType(type)}
                                                 className={cn(
-                                                    "px-3 py-1 text-xs rounded-full capitalize transition-colors",
+                                                    'px-3 py-1 text-xs rounded-full border capitalize transition-colors cursor-pointer',
                                                     selectedType === type
-                                                        ? "bg-accent text-white"
-                                                        : "bg-white dark:bg-neutral-800 text-neutral-600 hover:bg-neutral-100 dark:hover:bg-neutral-700"
+                                                        ? 'bg-accent text-white border-accent'
+                                                        : 'bg-surface-subtle border-border-subtle text-neutral-700 hover:border-border-strong'
                                                 )}
                                             >
                                                 {type.replace('-', ' ')}
@@ -184,169 +214,228 @@ export default function PublicationsList({ config, publications, embedded = fals
                 </AnimatePresence>
             </div>
 
-            {/* Publications Grid */}
-            <div className="space-y-6">
+            {/* Publications List */}
+            <div className="space-y-5">
                 {filteredPublications.length === 0 ? (
-                    <div className="text-center py-12 text-neutral-500">
+                    <div className="text-center py-12 text-neutral-500 editorial-card rounded-xl">
                         {messages.publications.noResults}
                     </div>
                 ) : (
-                    filteredPublications.map((pub, index) => (
-                        <motion.div
-                            key={pub.id}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.4, delay: 0.1 * index }}
-                            className="bg-white dark:bg-neutral-900 p-6 rounded-xl shadow-sm border border-neutral-200 dark:border-neutral-800 hover:shadow-md transition-all duration-200"
-                        >
-                            <div className="flex flex-col md:flex-row gap-6">
-                                {pub.preview && (
-                                    <div className="w-full md:w-48 flex-shrink-0">
-                                        <div className="aspect-video md:aspect-[4/3] relative rounded-lg overflow-hidden bg-neutral-100 dark:bg-neutral-800">
-                                            <Image
-                                                src={`/papers/${pub.preview}`}
-                                                alt={pub.title}
-                                                fill
-                                                className="object-cover"
-                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                            />
+                    filteredPublications.map((pub, index) => {
+                        const paperUrl = pub.doi ? `https://doi.org/${pub.doi}` : pub.url;
+                        const isPreprint = pub.type === 'preprint' || pub.description?.toLowerCase().includes('preprint');
+
+                        return (
+                            <motion.article
+                                key={pub.id}
+                                initial={{ opacity: 0, y: 12 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.35, delay: Math.min(0.05 * index, 0.35) }}
+                                className="editorial-card group p-5 sm:p-6 rounded-xl"
+                            >
+                                <div className="flex flex-col md:flex-row gap-5 items-start">
+                                    {pub.preview && (
+                                        <div className="w-full md:w-48 flex-shrink-0">
+                                            <div className="aspect-[16/10] md:aspect-[4/3] relative rounded-lg overflow-hidden border border-border-subtle bg-surface-subtle">
+                                                <Image
+                                                    src={`/papers/${pub.preview}`}
+                                                    alt={`${pub.title} graphical abstract`}
+                                                    fill
+                                                    className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                                                    sizes="(max-width: 768px) 100vw, 192px"
+                                                />
+                                            </div>
                                         </div>
-                                    </div>
-                                )}
-                                <div className="flex-grow">
-                                    <h3 className={`${embedded ? "text-lg" : "text-xl"} font-semibold text-primary mb-2 leading-tight`}>
-                                        <FormattedBibTeXText nodes={pub.titleNodes} fallback={pub.title} />
-                                    </h3>
-                                    <p className={`${embedded ? "text-sm" : "text-base"} text-neutral-600 dark:text-neutral-400 mb-2`}>
-                                        {pub.authors.map((author, idx) => (
-                                            <span key={idx}>
-                                                <span className={`${author.isHighlighted || author.isCorresponding || author.isCoAuthor ? 'font-bold' : ''} ${author.isHighlighted ? 'text-accent' : ''} ${author.isCoAuthor ? `underline underline-offset-4 ${author.isHighlighted ? 'decoration-accent' : 'decoration-neutral-400'}` : ''}`}>
-                                                    {author.orcid ? (
-                                                        <a
-                                                            href={author.orcid}
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            aria-label={`${author.name} ORCID profile`}
-                                                            className="hover:text-accent transition-colors"
-                                                        >
-                                                            {author.name}
-                                                        </a>
-                                                    ) : author.name}
-                                                </span>
-                                                {author.isCorresponding && (
-                                                    <sup className={`ml-0 ${author.isHighlighted ? 'text-accent' : 'text-neutral-600 dark:text-neutral-400'}`}>†</sup>
-                                                )}
-                                                {idx < pub.authors.length - 1 && ', '}
-                                            </span>
-                                        ))}
-                                    </p>
-                                    <p className="text-sm font-medium text-neutral-800 dark:text-neutral-600 mb-3">
-                                        {pub.journal || pub.conference} {pub.year}
-                                    </p>
-
-                                    {pub.description && (
-                                        <p className="text-sm text-neutral-600 dark:text-neutral-500 mb-4 line-clamp-3">
-                                            {pub.description}
-                                        </p>
                                     )}
+                                    <div className="flex-grow min-w-0">
+                                        {/* Venue & Year */}
+                                        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-1.5">
+                                            {(pub.journal || pub.conference) && (
+                                                <span className="font-serif italic text-[0.9rem] text-accent font-medium">
+                                                    {pub.journal || pub.conference}
+                                                </span>
+                                            )}
+                                            <span className="font-mono text-xs text-neutral-500">
+                                                {pub.year}
+                                            </span>
+                                            {isPreprint && (
+                                                <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[0.7rem] font-medium bg-surface-subtle text-neutral-600 border border-border-subtle">
+                                                    Preprint
+                                                </span>
+                                            )}
+                                        </div>
 
-                                    <div className="flex flex-wrap gap-2 mt-auto">
-                                        {pub.doi && (
-                                            <a
-                                                href={`https://doi.org/${pub.doi}`}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="inline-flex items-center px-3 py-1 rounded-md text-xs font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-accent hover:text-white transition-colors"
-                                            >
-                                                DOI
-                                            </a>
-                                        )}
-                                        {pub.code && (
-                                            <a
-                                                href={pub.code}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="inline-flex items-center px-3 py-1 rounded-md text-xs font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-accent hover:text-white transition-colors"
-                                            >
-                                                {messages.publications.code}
-                                            </a>
-                                        )}
-                                        {pub.abstract && (
-                                            <button
-                                                onClick={() => setExpandedAbstractId(expandedAbstractId === pub.id ? null : pub.id)}
-                                                className={cn(
-                                                    "inline-flex items-center px-3 py-1 rounded-md text-xs font-medium transition-colors",
-                                                    expandedAbstractId === pub.id
-                                                        ? "bg-accent text-white"
-                                                        : "bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-accent hover:text-white"
-                                                )}
-                                            >
-                                                <DocumentTextIcon className="h-3 w-3 mr-1.5" />
-                                                {messages.publications.abstract}
-                                            </button>
-                                        )}
-                                        {pub.bibtex && (
-                                            <button
-                                                onClick={() => setExpandedBibtexId(expandedBibtexId === pub.id ? null : pub.id)}
-                                                className={cn(
-                                                    "inline-flex items-center px-3 py-1 rounded-md text-xs font-medium transition-colors",
-                                                    expandedBibtexId === pub.id
-                                                        ? "bg-accent text-white"
-                                                        : "bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-accent hover:text-white"
-                                                )}
-                                            >
-                                                <BookOpenIcon className="h-3 w-3 mr-1.5" />
-                                                {messages.publications.bibtex}
-                                            </button>
-                                        )}
-                                    </div>
+                                        {/* Title */}
+                                        <h3 className={`${embedded ? 'text-lg' : 'text-[1.1rem]'} font-semibold text-primary mb-2 leading-snug`}>
+                                            {paperUrl ? (
+                                                <a
+                                                    href={paperUrl}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="hover:text-accent transition-colors"
+                                                >
+                                                    <FormattedBibTeXText nodes={pub.titleNodes} fallback={pub.title} />
+                                                </a>
+                                            ) : (
+                                                <FormattedBibTeXText nodes={pub.titleNodes} fallback={pub.title} />
+                                            )}
+                                        </h3>
 
-                                    <AnimatePresence>
-                                        {expandedAbstractId === pub.id && pub.abstract ? (
-                                            <motion.div
-                                                key="abstract"
-                                                initial={{ opacity: 0, height: 0 }}
-                                                animate={{ opacity: 1, height: 'auto' }}
-                                                exit={{ opacity: 0, height: 0 }}
-                                                className="overflow-hidden mt-4"
-                                            >
-                                                <div className="bg-neutral-50 dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700">
-                                                    <p className="text-sm text-neutral-600 dark:text-neutral-500 leading-relaxed">
-                                                        {pub.abstract}
-                                                    </p>
-                                                </div>
-                                            </motion.div>
-                                        ) : null}
-                                        {expandedBibtexId === pub.id && pub.bibtex ? (
-                                            <motion.div
-                                                key="bibtex"
-                                                initial={{ opacity: 0, height: 0 }}
-                                                animate={{ opacity: 1, height: 'auto' }}
-                                                exit={{ opacity: 0, height: 0 }}
-                                                className="overflow-hidden mt-4"
-                                            >
-                                                <div className="relative bg-neutral-50 dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700">
-                                                    <pre className="text-xs text-neutral-600 dark:text-neutral-500 overflow-x-auto whitespace-pre-wrap font-mono">
-                                                        {pub.bibtex}
-                                                    </pre>
-                                                    <button
-                                                        onClick={() => {
-                                                            navigator.clipboard.writeText(pub.bibtex || '');
-                                                            // Optional: Show copied feedback
-                                                        }}
-                                                        className="absolute top-2 right-2 p-1.5 rounded-md bg-white dark:bg-neutral-700 text-neutral-500 hover:text-accent shadow-sm border border-neutral-200 dark:border-neutral-600 transition-colors"
-                                                        title={messages.common.copyToClipboard}
+                                        {/* Authors */}
+                                        <p className="text-sm text-neutral-600 leading-relaxed mb-3">
+                                            {pub.authors.map((author, idx) => (
+                                                <span key={idx}>
+                                                    <span
+                                                        className={`${author.isHighlighted ? 'font-semibold text-accent' : ''} ${
+                                                            author.isCoAuthor
+                                                                ? `underline underline-offset-4 ${author.isHighlighted ? 'decoration-accent' : 'decoration-neutral-400'}`
+                                                                : ''
+                                                        }`}
                                                     >
-                                                        <ClipboardDocumentIcon className="h-4 w-4" />
-                                                    </button>
-                                                </div>
-                                            </motion.div>
-                                        ) : null}
-                                    </AnimatePresence>
+                                                        {author.orcid ? (
+                                                            <a
+                                                                href={author.orcid}
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                                aria-label={`${author.name} ORCID profile`}
+                                                                className="hover:text-accent transition-colors"
+                                                            >
+                                                                {author.name}
+                                                            </a>
+                                                        ) : (
+                                                            author.name
+                                                        )}
+                                                    </span>
+                                                    {author.isCorresponding && (
+                                                        <sup
+                                                            className={`ml-0.5 font-semibold ${author.isHighlighted ? 'text-accent' : 'text-neutral-600'}`}
+                                                            title="Corresponding author"
+                                                            aria-label="Corresponding author"
+                                                        >
+                                                            *
+                                                        </sup>
+                                                    )}
+                                                    {idx < pub.authors.length - 1 && ', '}
+                                                </span>
+                                            ))}
+                                        </p>
+
+                                        {pub.description && !pub.description.toLowerCase().includes('crossref metadata unavailable') && (
+                                            <p className="text-xs text-neutral-500 mb-3 line-clamp-2">
+                                                {pub.description}
+                                            </p>
+                                        )}
+
+                                        {/* Action Buttons */}
+                                        <div className="flex flex-wrap gap-2 mt-auto">
+                                            {pub.doi && (
+                                                <a
+                                                    href={`https://doi.org/${pub.doi}`}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-medium bg-surface-subtle border border-border-subtle text-neutral-700 hover:border-accent/60 hover:text-accent hover:bg-accent-soft transition-colors"
+                                                >
+                                                    <span>DOI</span>
+                                                    <ArrowUpRightIcon className="h-3 w-3" />
+                                                </a>
+                                            )}
+                                            {pub.code && (
+                                                <a
+                                                    href={pub.code}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-surface-subtle border border-border-subtle text-neutral-700 hover:border-accent/60 hover:text-accent hover:bg-accent-soft transition-colors"
+                                                >
+                                                    {messages.publications.code}
+                                                </a>
+                                            )}
+                                            {pub.abstract && (
+                                                <button
+                                                    type="button"
+                                                    onClick={() => setExpandedAbstractId(expandedAbstractId === pub.id ? null : pub.id)}
+                                                    className={cn(
+                                                        'inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium border transition-colors cursor-pointer',
+                                                        expandedAbstractId === pub.id
+                                                            ? 'bg-accent text-white border-accent'
+                                                            : 'bg-surface-subtle border-border-subtle text-neutral-700 hover:border-accent/60 hover:text-accent hover:bg-accent-soft'
+                                                    )}
+                                                >
+                                                    <DocumentTextIcon className="h-3.5 w-3.5 mr-1.5" />
+                                                    {messages.publications.abstract}
+                                                </button>
+                                            )}
+                                            {pub.bibtex && (
+                                                <button
+                                                    type="button"
+                                                    onClick={() => setExpandedBibtexId(expandedBibtexId === pub.id ? null : pub.id)}
+                                                    className={cn(
+                                                        'inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium border transition-colors cursor-pointer',
+                                                        expandedBibtexId === pub.id
+                                                            ? 'bg-accent text-white border-accent'
+                                                            : 'bg-surface-subtle border-border-subtle text-neutral-700 hover:border-accent/60 hover:text-accent hover:bg-accent-soft'
+                                                    )}
+                                                >
+                                                    <BookOpenIcon className="h-3.5 w-3.5 mr-1.5" />
+                                                    {messages.publications.bibtex}
+                                                </button>
+                                            )}
+                                        </div>
+
+                                        <AnimatePresence>
+                                            {expandedAbstractId === pub.id && pub.abstract ? (
+                                                <motion.div
+                                                    key="abstract"
+                                                    initial={{ opacity: 0, height: 0 }}
+                                                    animate={{ opacity: 1, height: 'auto' }}
+                                                    exit={{ opacity: 0, height: 0 }}
+                                                    className="overflow-hidden mt-4"
+                                                >
+                                                    <div className="bg-surface-subtle rounded-lg p-4 border border-border-subtle">
+                                                        <p className="text-sm text-neutral-700 leading-relaxed">
+                                                            {pub.abstract}
+                                                        </p>
+                                                    </div>
+                                                </motion.div>
+                                            ) : null}
+                                            {expandedBibtexId === pub.id && pub.bibtex ? (
+                                                <motion.div
+                                                    key="bibtex"
+                                                    initial={{ opacity: 0, height: 0 }}
+                                                    animate={{ opacity: 1, height: 'auto' }}
+                                                    exit={{ opacity: 0, height: 0 }}
+                                                    className="overflow-hidden mt-4"
+                                                >
+                                                    <div className="relative bg-surface-subtle rounded-lg p-4 border border-border-subtle">
+                                                        <pre className="text-xs text-neutral-700 overflow-x-auto whitespace-pre-wrap font-mono pr-20">
+                                                            {pub.bibtex}
+                                                        </pre>
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => handleCopyBibtex(pub.id, pub.bibtex)}
+                                                            className="absolute top-2.5 right-2.5 inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-surface text-neutral-600 hover:text-accent border border-border-subtle hover:border-accent/60 text-xs font-medium shadow-sm transition-colors cursor-pointer"
+                                                            title={messages.common.copyToClipboard}
+                                                        >
+                                                            {copiedId === pub.id ? (
+                                                                <>
+                                                                    <CheckIcon className="h-3.5 w-3.5 text-accent" />
+                                                                    <span className="text-accent">{messages.common.copied}</span>
+                                                                </>
+                                                            ) : (
+                                                                <>
+                                                                    <ClipboardDocumentIcon className="h-3.5 w-3.5" />
+                                                                    <span>{messages.common.copy}</span>
+                                                                </>
+                                                            )}
+                                                        </button>
+                                                    </div>
+                                                </motion.div>
+                                            ) : null}
+                                        </AnimatePresence>
+                                    </div>
                                 </div>
-                            </div>
-                        </motion.div>
-                    ))
+                            </motion.article>
+                        );
+                    })
                 )}
             </div>
         </motion.div>

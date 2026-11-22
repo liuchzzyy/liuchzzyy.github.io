@@ -2,54 +2,34 @@
 
 ## 1. Atmosphere & Identity
 
-An editorial academic profile: deep navy structure, warm gold accents, and restrained card depth keep dense research content readable. The signature is author-first metadata presented in a calm, bilingual reading flow.
+An editorial academic profile inspired by high-impact scientific journals: warm ivory paper canvas, deep ink navy typography, antique amber-bronze accents, and restrained paper-card depth keep dense research content calm, authoritative, and effortless to read across both English and Chinese locales.
 
 ## 2. Color
 
 | Role | Token | Light | Dark |
 |------|-------|-------|------|
-| Background | `--background` | `#fefffe` | `#0f172a` |
-| Foreground | `--foreground` | `#0f172a` | `#f8fafc` |
-| Primary | `--primary` | `#1e293b` | `#f8fafc` |
-| Accent | `--accent` | `#d4a562` | `#e4b976` |
-| Neutral surfaces | `--neutral-50` to `--neutral-900` | Tailwind CSS variables | inverted dark ramp |
+| Background | `--background` | `#FAF9F6` | `#0D1321` |
+| Elevated surface | `--surface` | `#FFFFFF` | `#141D2F` |
+| Subtle surface | `--surface-subtle` | `#F3EFE7` | `#1B263B` |
+| Hairline border | `--border-subtle` | `#E6E0D5` | `rgba(218, 198, 162, 0.14)` |
+| Strong border | `--border-strong` | `#D3C9B8` | `rgba(224, 177, 101, 0.34)` |
+| Foreground | `--foreground` | `#1A2332` | `#F0EDE6` |
+| Primary headings | `--primary` | `#162032` | `#F6F4EE` |
+| Accent | `--accent` | `#9A6B2F` | `#E0B165` |
+| Accent soft tint | `--accent-soft` | `rgba(154, 107, 47, 0.09)` | `rgba(224, 177, 101, 0.14)` |
 
-Interactive links use `accent` and `accent-dark`; no new colors are introduced by the ORCID links.
+Light-mode accent (`#9A6B2F`) provides > 4.5:1 contrast against `#FAF9F6` and `#FFFFFF` for WCAG 2.2 AA legibility.
 
 ## 3. Typography
 
-- Body: `Inter`, system sans fallback, using Tailwind `text-sm` through `text-lg`.
-- Headings: `Georgia CDN`, Georgia fallback, using Tailwind serif heading utilities.
-- Chinese headings use the existing Source Han Serif fallback stack.
-- Author metadata remains at the existing body-small scale.
+- **Body**: `Inter` (loaded via `next/font/google`) with system CJK sans fallbacks (`PingFang SC`, `Hiragino Sans GB`, `Microsoft YaHei`).
+- **Headings & Journal Titles**: `Newsreader` (loaded via `next/font/google`), paired with `Source Han Serif SC` / `Noto Serif CJK SC` / `Songti SC` for Chinese locales.
+- **Metadata (Dates, Years, Counts, BibTeX)**: `JetBrains Mono` (`--font-mono`).
 
-## 4. Spacing & Layout
+## 4. Layout & Components
 
-- Existing Tailwind spacing scale is the source of truth; spacing follows a 4px base.
-- Publication cards use the existing responsive stack: one column on narrow screens and preview/content rows from `md` upward.
-- The document retains the existing full-width reading flow and responsive breakpoints.
-
-## 5. Components
-
-### Publication author metadata
-
-- **Structure**: inline author list, optional ORCID anchor around the author name, optional superscript correspondence marker.
-- **Variants**: highlighted author, co-first author, corresponding author, verified ORCID link, plain author.
-- **Spacing**: existing inline punctuation and author-list flow.
-- **States**: default, hover (accent color), focus (browser-visible focus), visited (browser default).
-- **Accessibility**: semantic external anchor, descriptive `aria-label`, `target="_blank"` with `rel="noopener noreferrer"`.
-- **Motion**: existing short color transition only; no new layout animation.
-- **Layout**: inline cluster within the publication card.
-
-## 6. Motion & Interaction
-
-Existing Framer Motion entry transitions remain unchanged. ORCID links use the existing accent color transition and respect the site's global reduced-motion behavior.
-
-## 7. Depth & Surface
-
-The existing mixed strategy is retained: neutral surface shifts plus the current subtle card borders and shadows. ORCID links do not add a new surface treatment.
-
-## 8. Accessibility Constraints & Accepted Debt
-
-- WCAG 2.2 AA target, keyboard-reachable links, visible browser focus, and bilingual text preserved.
-- ORCID links are added only for verified author identity matches from ORCID/Crossref metadata. Corresponding-author status is not inferred where source metadata does not identify it.
+- **Two-column Homepage**: Sticky left profile sidebar (`lg:col-span-4`) and primary reading column (`lg:col-span-8`) inside a `max-w-6xl` container aligned with the masthead navigation bar.
+- **Profile Sidebar**: Framed square portrait, serif name with subtle accent divider, circular contact/academic icon row with mutually exclusive inline popovers (Email with one-click copy; Work Address with direct ICMAB-CSIC Google Maps link), and scannable pill-styled Research Interests card.
+- **Selected Publications**: Horizontal editorial cards pairing a 4:3 TOC graphical abstract frame (`public/papers/1.jpg`–`4.jpg`) with italic serif venue, monospaced year, linked title, verified ORCID author metadata, DOI link, and one-click BibTeX copy feedback.
+- **News Timeline**: Vertical hairline timeline with amber markers and monospaced date badges.
+- **Print-ready CV**: Clean `@media print` styling hides navigation and footer chrome for direct PDF export.

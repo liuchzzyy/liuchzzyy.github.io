@@ -2,7 +2,7 @@
 title = "Dr. Cheng Liu"
 description = "Materials scientist focusing on aqueous Zn–MnO<sub>2</sub> batteries and operando characterization techniques."
 favicon = "/favicon.svg"
-last_updated = "August 27, 2026"
+last_updated = "November 22, 2026"
 
 [author]
 name = "Dr. Cheng Liu"
@@ -13,7 +13,7 @@ avatar = "/bio.jpg"
 [social]
 email = "liuchzzyy@163.com"
 location = "Bellaterra, Spain"
-location_url = "https://maps.google.com"
+location_url = "https://www.google.com/maps/search/?api=1&query=Institute+of+Materials+Science+of+Barcelona+ICMAB-CSIC+Bellaterra+Spain"
 location_details = [
   "Department of Solid-State Chemistry (SSC),",
   "Institute of Materials Science of Barcelona (ICMAB-CSIC),",

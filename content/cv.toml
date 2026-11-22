@@ -1,3 +1,5 @@
 type = "text"
 title = "CV"
 source = "cv.md"
+pdf = "/cv.pdf"
+pdf_filename = "Cheng_Liu_CV.pdf"
